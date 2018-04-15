@@ -1,0 +1,1 @@
+#Include %A_MyDocuments%\AutoHotkey\!submodules\_Struct\_Struct.ahk

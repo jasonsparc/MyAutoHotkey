@@ -1,0 +1,1 @@
+#Include %A_MyDocuments%\AutoHotkey\!submodules\Paris-AutoHotkey-Scripts\Functions.ahk
