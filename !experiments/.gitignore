@@ -1,0 +1,9 @@
+*
+# Everything inside this directory is excluded.
+#
+# Also, this gitignore file is here to ensure that the current directory is
+# persisted by git.
+#
+# Since this gitignore file also excludes itself from git, the `-f` flag was
+# used to add this file to git.
+#
