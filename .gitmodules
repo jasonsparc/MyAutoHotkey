@@ -1,0 +1,15 @@
+[submodule "!submodules/_Struct"]
+	path = !submodules/_Struct
+	url = https://github.com/HotKeyIt/_Struct.git
+[submodule "!submodules/AHKHID"]
+	path = !submodules/AHKHID
+	url = https://github.com/jleb/AHKHID.git
+[submodule "!submodules/Paris-AutoHotkey-Scripts"]
+	path = !submodules/Paris-AutoHotkey-Scripts
+	url = https://github.com/Paris/AutoHotkey-Scripts.git
+[submodule "!submodules/VirtualDesktopAccessor"]
+	path = !submodules/VirtualDesktopAccessor
+	url = git@github.com:Ciantic/VirtualDesktopAccessor.git
+[submodule "!submodules/WinStructs"]
+	path = !submodules/WinStructs
+	url = https://github.com/ahkscript/WinStructs.git
