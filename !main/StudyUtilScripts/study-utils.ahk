@@ -3,8 +3,11 @@
 
 global calc_sheets := "C:\dev\studies\``helper-calc-sheets"
 
-global StudyWindowPrefs_X := 440, global StudyWindowPrefs_Y := 0
-global StudyWindowPrefs_W := 1336, global StudyWindowPrefs_H := 1046
+global StudyWindowPrefs_X := Round(A_ScreenWidth * 440/1920)
+global StudyWindowPrefs_Y := Round(A_ScreenHeight * 0/1080)
+
+global StudyWindowPrefs_W := Round(A_ScreenWidth * 1336/1920)
+global StudyWindowPrefs_H := Round(A_ScreenHeight * 1046/1080)
 
 Prompt(AskTitle:="Start Routine", AskMsg:="") {
 	MsgBox, 36, %AskTitle%, %AskMsg%
