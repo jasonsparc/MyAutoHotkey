@@ -1,5 +1,6 @@
 
 #Include <file-open-utils>
+#Include <Functions>
 
 global calc_sheets := "C:\dev\studies\``helper-calc-sheets"
 
@@ -7,7 +8,10 @@ global StudyWindowPrefs_X := Round(A_ScreenWidth * 440/1920)
 global StudyWindowPrefs_Y := Round(A_ScreenHeight * 0/1080)
 
 global StudyWindowPrefs_W := Round(A_ScreenWidth * 1336/1920)
-global StudyWindowPrefs_H := Round(A_ScreenHeight * 1046/1080)
+global StudyWindowPrefs_H := SysGet(62) - 9
+;global StudyWindowPrefs_H := Round(A_ScreenHeight * 1047/1080)
+
+;MsgBox %StudyWindowPrefs_X%`t%StudyWindowPrefs_Y%`n%StudyWindowPrefs_W%`t%StudyWindowPrefs_H%
 
 Prompt(AskTitle:="Start Routine", AskMsg:="") {
 	MsgBox, 36, %AskTitle%, %AskMsg%
