@@ -62,6 +62,11 @@ StudyDoc(sFile, bDontMinimize=false, pTimeout:=10) {
 	HandleStudyWinPos(OutHwnd, bDontMinimize)
 }
 
+StudyTarget(sTarget, sParams:="", bDontMinimize=false, pTimeout:=10) {
+	OutHwnd := OpenWaitHwnd(sTarget, sParams,, pTimeout)
+	HandleStudyWinPos(OutHwnd, bDontMinimize)
+}
+
 HandleStudyWinPos(sHwnd, bDontMinimize=false) {
 	if (sHwnd) {
 		WinRestore ahk_id %sHwnd%

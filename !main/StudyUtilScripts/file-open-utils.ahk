@@ -1,6 +1,18 @@
 ﻿
 ; File Open Utilities
 
+ResolveLnk(sTarget, byref sOutLnkParams:="") {
+	SplitPath, sTarget, , , OutExt
+	if (OutExt = "lnk") {
+		FileGetShortcut %sTarget%, sTarget, , sOutLnkParams
+		if (ErrorLevel) {
+			MsgBox 16, Error, %sTarget%`n`nLink could not be resolved.
+			return ""
+		}
+	}
+	return sTarget
+}
+
 OpenWaitHwnd(sTarget, sParams:="", RunState:="", pTimeout:=10, sValidHwndPredicate:="IsValidWinTitleText") {
 	; -- Find Exe --
 
