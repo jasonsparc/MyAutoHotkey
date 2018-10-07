@@ -49,11 +49,13 @@ ReviewQuizes(sTargetPseudoArray:="Quiz_", pStartIndex:=1, pEndIndex:=0) {
 }
 
 StudyUrl(sUrl, bDontMinimize=false, pTimeout:=10, bNewWindow=true) {
+	if (sUrl != "")
+		sUrl = "%sUrl%"
 	if (bNewWindow) {
-		OutHwnd := OpenWaitHwnd("chrome.exe", "--new-window """ . sUrl . """",, pTimeout)
+		OutHwnd := OpenWaitHwnd("chrome.exe", "--new-window " . sUrl,, pTimeout)
 		HandleStudyWinPos(OutHwnd, bDontMinimize)
 	} else {
-		Run chrome.exe "%sUrl%"
+		Run chrome.exe %sUrl%
 	}
 }
 
