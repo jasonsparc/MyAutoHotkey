@@ -9,7 +9,7 @@
 	url = https://github.com/Paris/AutoHotkey-Scripts.git
 [submodule "!submodules/VirtualDesktopAccessor"]
 	path = !submodules/VirtualDesktopAccessor
-	url = git@github.com:Ciantic/VirtualDesktopAccessor.git
+	url = https://github.com/Ciantic/VirtualDesktopAccessor.git
 [submodule "!submodules/WinStructs"]
 	path = !submodules/WinStructs
 	url = https://github.com/ahkscript/WinStructs.git
