@@ -11,10 +11,10 @@ Gosub InitSetup
 ; -------------------------------------------------------------------------
 
 ~XButton1 & c::^c
-~XButton1 & LButton::^c
+~XButton1 & RButton::^c
 
 ~XButton1 & v::^v
-~XButton1 & RButton::^v
+~XButton1 & LButton::^v
 
 ; -------------------------------------------------------------------------
 Return ; ***
