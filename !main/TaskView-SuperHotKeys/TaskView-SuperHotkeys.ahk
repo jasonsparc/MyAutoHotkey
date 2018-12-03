@@ -27,7 +27,7 @@ LeftDesktop:  ; Switch to left virtual desktop
 		; Activates the desktop -- also restores the last active window upon transition.
 		WinActivate ahk_class WorkerW ahk_exe explorer.exe
 	}
-	SendInput {Blind}^#{Left}
+	SendInput {Blind}{LCtrl DownTemp}{LWin DownTemp}{Left}{LWin Up}{LCtrl Up}
 	Sleep 180
 Return
 
@@ -36,7 +36,7 @@ RightDesktop:  ; Switch to right virtual desktop
 		; Activates the desktop -- also restores the last active window upon transition.
 		WinActivate ahk_class WorkerW ahk_exe explorer.exe
 	}
-	SendInput {Blind}^#{Right}
+	SendInput {Blind}{RCtrl DownTemp}{RWin DownTemp}{Right}{RWin Up}{RCtrl Up}
 	Sleep 180
 Return
 
@@ -86,10 +86,10 @@ GoToDesktop(desktopNumber) {
 
 	if (CurrentDesktop < desktopNumber) {
 		TransitionCount := desktopNumber - CurrentDesktop
-		TransitionHotkey = ^#{Right}
+		TransitionHotkey = {RCtrl DownTemp}{RWin DownTemp}{Right}{RWin Up}{RCtrl Up}
 	} else if (CurrentDesktop > desktopNumber) {
 		TransitionCount := CurrentDesktop - desktopNumber
-		TransitionHotkey = ^#{Left}
+		TransitionHotkey = {LCtrl DownTemp}{LWin DownTemp}{Left}{LWin Up}{LCtrl Up}
 	}
 
 	; For a smooth transition
