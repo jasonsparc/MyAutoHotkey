@@ -4,7 +4,8 @@
 
 #If MouseIsOver("ahk_class AcrobatSDIWindow ahk_exe AcroRd32.exe")
 
-XButton1 & LButton::
+XButton1 & Space::
+XButton1 & MButton::
 AdobeReader_ToggleHandOrSelect()
 Return
 
