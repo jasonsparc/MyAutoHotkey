@@ -61,7 +61,7 @@ StabilizeScroll() {
 #Include %A_ScriptDir%\HScroll-XButtons_includes
 
 #Include Instant-Copy-Paste.ahk
-#Include AdobeReader-Extras.ahk
+#Include AdobeReader+Extras.ahk
 #Include AndroidStudio.ahk
 #Include Blender.ahk
 #Include Excel.ahk
