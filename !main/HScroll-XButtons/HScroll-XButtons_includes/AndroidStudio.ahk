@@ -9,17 +9,15 @@
 #If MouseIsOver("ahk_class SunAwtFrame ahk_exe studio64.exe")
 
 XButton1 & WheelUp::
-Loop %A_EventInfo%
-	Send {shift down}{WheelUp}
+Send {shift down}{WheelUp %A_EventInfo%}
 Return
 
 XButton1 & WheelDown::
-Loop %A_EventInfo%
-	Send {shift down}{WheelDown}
+Send {shift down}{WheelDown %A_EventInfo%}
 Return
 
 ~XButton1 up::
-	Send {shift up}
+Send {shift up}
 Return
 
 #If ; End If

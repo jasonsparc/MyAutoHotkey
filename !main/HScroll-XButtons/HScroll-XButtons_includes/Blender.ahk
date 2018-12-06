@@ -11,13 +11,11 @@
 #If MouseIsOver("ahk_class GHOST_WindowClass ahk_exe blender.exe")
 
 XButton1 & WheelUp::
-Loop %A_EventInfo%
-	Send {blind}{ctrl down}{WheelUp}
+Send {blind}{ctrl down}{WheelUp %A_EventInfo%}
 Return
 
 XButton1 & WheelDown::
-Loop %A_EventInfo%
-	Send {blind}{ctrl down}{WheelDown}
+Send {blind}{ctrl down}{WheelDown %A_EventInfo%}
 Return
 
 *~XButton1 up::SendInput {ctrl up}
