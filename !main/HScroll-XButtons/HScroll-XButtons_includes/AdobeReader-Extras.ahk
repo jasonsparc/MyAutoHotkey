@@ -6,6 +6,7 @@
 
 XButton1 & Space::
 XButton1 & MButton::
+XButton1 & LButton::
 AdobeReader_ToggleHandOrSelect()
 Return
 
