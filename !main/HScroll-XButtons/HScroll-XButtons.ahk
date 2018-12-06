@@ -14,13 +14,13 @@ Return
 ; Scroll left
 XButton1 & WheelUp::
 StabilizeScroll()
-Click WheelLeft
+Click WheelLeft %A_EventInfo%
 Return
 
 ; Scroll right
 XButton1 & WheelDown::
 StabilizeScroll()
-Click WheelRight
+Click WheelRight %A_EventInfo%
 Return
 
 ; Make XButton1 NOP
