@@ -66,6 +66,7 @@ StabilizeScroll() {
 #Include AndroidStudio.ahk
 #Include Blender.ahk
 #Include Excel.ahk
+#Include GitExtensions.ahk
 #Include Notepad2.ahk
 #Include VisualStudio.ahk
 
