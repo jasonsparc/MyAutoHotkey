@@ -17,7 +17,10 @@ Send {shift down}{WheelDown %A_EventInfo%}
 Return
 
 ~XButton1 up::
-Send {shift up}
+; Sends a dummy keypress along with the shift key up input, to avoid triggering
+; ...IntelliJ’s “Search everything” action.
+Send {ctrl downtemp}{shift up}{ctrl up}
+
 Return
 
 #If ; End If
