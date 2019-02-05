@@ -13,7 +13,9 @@ ResolveLnk(sTarget, byref sOutLnkParams:="") {
 	return sTarget
 }
 
-OpenWaitHwnd(sTarget, sParams:="", RunState:="", pTimeout:=10, sValidHwndPredicate:="IsValidWinTitleText") {
+global OpenWaitHwnd_pTimeout_Default := 4
+
+OpenWaitHwnd(sTarget, sParams:="", RunState:="", pTimeout:=OpenWaitHwnd_pTimeout_Default, sValidHwndPredicate:="IsValidWinTitleText") {
 	; -- Find Exe --
 
 	sExe := sTarget
@@ -53,6 +55,7 @@ OpenWaitHwnd(sTarget, sParams:="", RunState:="", pTimeout:=10, sValidHwndPredica
 	sTargetWin = ahk_exe %sExe%
 
 	OldIDs := GetValidWinIDs(sTargetWin, sValidHwndPredicate)
+	; TODO Use `RunWait` instead?
 	Run "%sExe%" %sParams%, , %RunState%
 
 	Retries := pTimeout / 0.5

@@ -48,7 +48,7 @@ ReviewQuizes(sTargetPseudoArray:="Quiz_", pStartIndex:=1, pEndIndex:=0) {
 	}
 }
 
-StudyUrl(sUrl, bDontMinimize=false, pTimeout:=10, bNewWindow=true) {
+StudyUrl(sUrl, bDontMinimize=false, pTimeout:=OpenWaitHwnd_pTimeout_Default, bNewWindow=true) {
 	if (sUrl != "")
 		sUrl = "%sUrl%"
 	if (bNewWindow) {
@@ -59,12 +59,12 @@ StudyUrl(sUrl, bDontMinimize=false, pTimeout:=10, bNewWindow=true) {
 	}
 }
 
-StudyDoc(sFile, bDontMinimize=false, pTimeout:=10) {
+StudyDoc(sFile, bDontMinimize=false, pTimeout:=OpenWaitHwnd_pTimeout_Default) {
 	OutHwnd := OpenWaitHwnd(sFile,,, pTimeout)
 	HandleStudyWinPos(OutHwnd, bDontMinimize)
 }
 
-StudyTarget(sTarget, sParams:="", bDontMinimize=false, pTimeout:=10) {
+StudyTarget(sTarget, sParams:="", bDontMinimize=false, pTimeout:=OpenWaitHwnd_pTimeout_Default) {
 	OutHwnd := OpenWaitHwnd(sTarget, sParams,, pTimeout)
 	HandleStudyWinPos(OutHwnd, bDontMinimize)
 }
