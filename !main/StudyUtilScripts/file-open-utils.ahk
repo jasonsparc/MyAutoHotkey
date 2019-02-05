@@ -51,9 +51,10 @@ OpenWaitHwnd(sTarget, sParams:="", RunState:="", pTimeout:=4, sValidHwndPredicat
 	; -- Begin Run --
 
 	sTargetWin = ahk_exe %sExe%
-
 	OldIDs := GetValidWinIDs(sTargetWin, sValidHwndPredicate)
-	; TODO Use `RunWait` instead?
+
+	; NOTE Not using `RunWait` here since some programs either doesn't respond
+	; directly or doesn't respond instantly even after the program has started.
 	Run "%sExe%" %sParams%, , %RunState%
 
 	Retries := pTimeout / 0.5
