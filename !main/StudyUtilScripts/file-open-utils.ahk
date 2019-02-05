@@ -13,10 +13,7 @@ ResolveLnk(sTarget, byref sOutLnkParams:="") {
 	return sTarget
 }
 
-global OpenWaitHwnd_pTimeout_Default := 4
-global OpenWaitHwnd_sValidHwndPredicate_Default := "IsValidWinTitleText"
-
-OpenWaitHwnd(sTarget, sParams:="", RunState:="", pTimeout:=OpenWaitHwnd_pTimeout_Default, sValidHwndPredicate:=OpenWaitHwnd_sValidHwndPredicate_Default) {
+OpenWaitHwnd(sTarget, sParams:="", RunState:="", pTimeout:=4, sValidHwndPredicate:="IsValidWinTitleText") {
 	; -- Find Exe --
 
 	sExe := sTarget
