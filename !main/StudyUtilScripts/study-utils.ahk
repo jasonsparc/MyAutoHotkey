@@ -13,8 +13,8 @@ global StudyWindowPrefs_H := SysGet(62) - 9
 
 ;MsgBox %StudyWindowPrefs_X%`t%StudyWindowPrefs_Y%`n%StudyWindowPrefs_W%`t%StudyWindowPrefs_H%
 
-Prompt(AskTitle:="Start Routine", AskMsg:="", HasCancel:=false, ExitOnCancel:=false) {
-	MsgBox, % HasCancel ? 35 : 36, %AskTitle%, %AskMsg%
+Prompt(AskTitle:="Start Routine", AskMsg:="", HasCancel:=false, ExitOnCancel:=false, ExtraOptions:=0) {
+	MsgBox, % (HasCancel ? 35 : 36) + ExtraOptions, %AskTitle%, %AskMsg%
 	IfMsgBox Yes
 		return true
 	IfMsgBox Cancel
