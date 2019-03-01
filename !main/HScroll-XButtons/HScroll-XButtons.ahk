@@ -69,6 +69,7 @@ StabilizeScroll() {
 #Include GitExtensions.ahk
 #Include Notepad2.ahk
 #Include VisualStudio.ahk
+#Include WinMerge.ahk
 
 ;-+-*-+-
 
