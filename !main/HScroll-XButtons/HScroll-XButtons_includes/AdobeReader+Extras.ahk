@@ -34,14 +34,21 @@ Return
 ; Handy mappings to quickly "Highlight" the current selection
 XButton1 & q::
 !q::
+!+q::
+^+q::
 XButton1 & x::
 !x::
+!+x::
+^+x::
 Send {AppsKey}h
 Return
 
 ; Mouse mappings for undo and redo
 XButton1 & z::^z
 XButton1 & y::^+z
+
+; Correct "redo" mapping
+^y::^+z
 
 ; Mouse mappings for the delete key
 XButton1 & d::Delete
