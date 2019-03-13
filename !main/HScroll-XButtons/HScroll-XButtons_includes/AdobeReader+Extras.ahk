@@ -43,6 +43,13 @@ XButton1 & x::
 Send {AppsKey}h
 Return
 
+; Handy mappings to quickly copy "highlight"-objects
+; NOTE: It requires a different handling than a mere `CTRL+C`
+XButton1 & c::
+^RButton::
+Send {Esc}{RButton}c
+Return
+
 ; Mouse mappings for undo and redo
 XButton1 & z::^z
 XButton1 & y::^+z
