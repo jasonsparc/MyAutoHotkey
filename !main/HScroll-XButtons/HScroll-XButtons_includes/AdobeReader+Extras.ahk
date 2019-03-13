@@ -51,7 +51,11 @@ XButton1 & y::^+z
 ^y::^+z
 
 ; Mouse mappings for the delete key
-XButton1 & d::Delete
+XButton1 & `::
+^`::
+!`::
+Send {Delete}
+Return
 
 ;
 ; Utilities
