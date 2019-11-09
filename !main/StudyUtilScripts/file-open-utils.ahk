@@ -89,6 +89,8 @@ GetInternetShortcutUrl(sInternetShortcutFile) {
 }
 
 FindExecutable(sDocument, pMaxPathLen:=260) {
+	; See, https://stackoverflow.com/a/9540278
+
 	VarSetCapacity(Ret, pMaxPathLen)
 	RetCode := DllCall("shell32.dll\FindExecutable", "Str", sDocument, "Str", "", "Str", Ret)
 
