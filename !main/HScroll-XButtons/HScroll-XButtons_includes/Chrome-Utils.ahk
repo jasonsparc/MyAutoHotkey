@@ -1,5 +1,5 @@
 
-#If MouseIsOver("ahk_class Chrome_WidgetWin_1 ahk_exe chrome.exe")
+#IfWinActive ahk_class Chrome_WidgetWin_1 ahk_exe chrome.exe
 
 ; Easily reopen closed tab.
 ;
