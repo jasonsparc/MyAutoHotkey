@@ -4,7 +4,8 @@
 ; Also, with horizontal scrolling acceleration.
 ;
 
-#If MouseIsOver("ahk_class XLMAIN ahk_exe EXCEL.exe")
+; NOTE: Not using `MouseIsOver` since our remaps involve non-modifier keys.
+#IfWinActive ahk_class XLMAIN ahk_exe EXCEL.exe
 
 ; Scroll left
 XButton1 & WheelUp::

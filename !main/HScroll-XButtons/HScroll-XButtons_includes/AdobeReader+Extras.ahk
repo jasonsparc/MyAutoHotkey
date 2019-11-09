@@ -41,7 +41,7 @@ Return
 ; Extras
 ;
 
-#If MouseIsOver(AdobeReader_WinTitle)
+#If WinActive(AdobeReader_WinTitle)
 
 ; Handy mappings to quickly toggle between the "Hand Tool" and "Select Tool"
 XButton1 & Space::
