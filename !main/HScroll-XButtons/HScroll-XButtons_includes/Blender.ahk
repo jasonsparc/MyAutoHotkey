@@ -8,17 +8,37 @@
 ; Also, provides a handy mapping for zooming in/out.
 ;
 
-#If MouseIsOver("ahk_class GHOST_WindowClass ahk_exe blender.exe")
+Blender_init() {
+	static _ := Blender_init()
+	global Blender_WinTitle := "ahk_class GHOST_WindowClass ahk_exe blender.exe"
+}
+
+#If MouseIsOver(Blender_WinTitle)
 
 XButton1 & WheelUp::
 Send {blind}{ctrl down}{WheelUp %A_EventInfo%}
+Blender_HeldKeys := true
 Return
 
 XButton1 & WheelDown::
 Send {blind}{ctrl down}{WheelDown %A_EventInfo%}
+Blender_HeldKeys := true
 Return
 
-*~XButton1 up::SendInput {ctrl up}
+; Auto-release held keys regardless of current mouseover
+#If Blender_HeldKeys
+
+*~XButton1 up::
+Blender_HeldKeys := false
+SendInput {ctrl up}
+Return
+
+#If ; End If --------------------------------------------------------------
+
+; Extras
+;
+
+#If MouseIsOver(Blender_WinTitle)
 
 ; Handy mapping for zooming
 XButton1 & MButton::SendInput {ctrl down}{MButton down}

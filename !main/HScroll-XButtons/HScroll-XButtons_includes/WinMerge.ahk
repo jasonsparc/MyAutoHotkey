@@ -11,14 +11,20 @@
 XButton1 & WheelUp::
 StabilizeScroll()
 Send {shift down}{WheelUp %A_EventInfo%}
+WinMerge_HeldKeys := true
 Return
 
 XButton1 & WheelDown::
 StabilizeScroll()
 Send {shift down}{WheelDown %A_EventInfo%}
+WinMerge_HeldKeys := true
 Return
 
+; Auto-release held keys regardless of current mouseover
+#If WinMerge_HeldKeys
+
 ~XButton1 up::
+WinMerge_HeldKeys := false
 Send {shift up}
 Return
 

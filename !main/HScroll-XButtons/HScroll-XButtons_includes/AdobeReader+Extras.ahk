@@ -8,21 +8,40 @@
 ; Also, some extras for Adobe Reader that augments the reading experience.
 ;
 
-#If MouseIsOver("ahk_class AcrobatSDIWindow ahk_exe AcroRd32.exe")
+AdobeReader_init() {
+	static _ := AdobeReader_init()
+	global AdobeReader_WinTitle := "ahk_class AcrobatSDIWindow ahk_exe AcroRd32.exe"
+}
+
+#If MouseIsOver(AdobeReader_WinTitle)
 
 XButton1 & WheelUp::
 StabilizeScroll()
 Send {shift down}{WheelUp %A_EventInfo%}
+AdobeReader_HeldKeys := true
 Return
 
 XButton1 & WheelDown::
 StabilizeScroll()
 Send {shift down}{WheelDown %A_EventInfo%}
+AdobeReader_HeldKeys := true
 Return
 
+; Auto-release held keys regardless of active window or current mouseover
+#If AdobeReader_HeldKeys
+
 ~XButton1 up::
+AdobeReader_HeldKeys := false
 Send {shift up}
 Return
+
+#If ; End If --------------------------------------------------------------
+
+;
+; Extras
+;
+
+#If MouseIsOver(AdobeReader_WinTitle)
 
 ; Handy mappings to quickly toggle between the "Hand Tool" and "Select Tool"
 XButton1 & Space::
