@@ -31,6 +31,10 @@ XButton1::Return
 ; Utilities for our custom handler includes
 
 MouseIsOver(WinTitle) {
+	if (!WinTitle)
+		; Fail-fast, since an empty `WinTitle` is probably not on purpose.
+		return 0x0
+
 	MouseGetPos,,, Win
 	return WinExist(WinTitle . " ahk_id " . Win)
 }
