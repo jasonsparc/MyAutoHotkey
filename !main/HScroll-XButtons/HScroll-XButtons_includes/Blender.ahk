@@ -13,7 +13,9 @@ Blender_init() {
 	global Blender_WinTitle := "ahk_class GHOST_WindowClass ahk_exe blender.exe"
 }
 
-#If MouseIsOver(Blender_WinTitle)
+; NOTE: Not using `MouseIsOver` here since Blender doesn't consume key input
+; events (including modifier keys) when its window is inactive.
+#If WinActive(Blender_WinTitle)
 
 XButton1 & WheelUp::
 Send {blind}{ctrl down}{WheelUp %A_EventInfo%}
@@ -38,7 +40,7 @@ Return
 ; Extras
 ;
 
-#If MouseIsOver(Blender_WinTitle)
+#If WinActive(Blender_WinTitle)
 
 ; Handy mapping for zooming
 XButton1 & MButton::SendInput {ctrl down}{MButton down}
