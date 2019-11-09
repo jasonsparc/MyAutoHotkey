@@ -30,6 +30,11 @@ XButton1::Return
 ;-=-=-=- * * * -=-=-=-
 ; Utilities for our custom handler includes
 
+MouseIsOver(WinTitle) {
+	MouseGetPos,,, Win
+	return WinExist(WinTitle . " ahk_id " . Win)
+}
+
 GetHScrollLines() {
 	; https://autohotkey.com/board/topic/8435-mouse-wheel-speed/
 	; https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947(v=vs.85).aspx
@@ -38,11 +43,6 @@ GetHScrollLines() {
 	; #define SPI_GETWHEELSCROLLCHARS    0x6C
 	DllCall("SystemParametersInfo", UInt, 0x6C, UInt, 0, UIntP, Scroll_Lines, UInt, 0) 
 	return Scroll_Lines
-}
-
-MouseIsOver(WinTitle) {
-	MouseGetPos,,, Win
-	return WinExist(WinTitle . " ahk_id " . Win)
 }
 
 ; Needed because mouse wheel sometimes becomes unstable when another button is held.
