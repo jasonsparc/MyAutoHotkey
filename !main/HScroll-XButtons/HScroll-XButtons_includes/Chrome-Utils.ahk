@@ -3,7 +3,8 @@
 
 ; Easily reopen closed tab.
 ;
-; Now a necessity, ever since Chrome's UX team made a dumb update.
+; Now a necessity, ever since Chrome's UX team made a dumb update. See,
+; https://bugs.chromium.org/p/chromium/issues/detail?id=515930
 ;
 XButton1 & MButton::^T
 
