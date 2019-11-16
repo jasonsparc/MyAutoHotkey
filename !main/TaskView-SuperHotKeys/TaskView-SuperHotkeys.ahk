@@ -19,7 +19,15 @@ Return ; Block execution of utility code below...
 ; Utilities for switching between virtual desktops
 
 IsTaskViewActive() {
-	Return WinActive("Task View ahk_class MultitaskingViewFrame")
+	Id := WinExist("A")
+	If (Id) {
+		WinGetTitle ATitle
+		WinGetClass AClass
+		ATitleFull = %ATitle% ahk_class %AClass%
+		If (ATitleFull == "Task View ahk_class Windows.UI.Core.CoreWindow")
+			Return Id
+	}
+	Return 0x0
 }
 
 LeftDesktop:  ; Switch to left virtual desktop
@@ -214,7 +222,7 @@ Return
 ; Easily switch between virtual desktops when in Task View
 
 ;_+_+_
-#IfWinActive Task View ahk_class MultitaskingViewFrame
+#If IsTaskViewActive()
 
 PgUp::Goto LeftDesktop
 PgDn::Goto RightDesktop
@@ -285,7 +293,7 @@ NumpadClear & NumpadPgDn::Goto RightDesktop
 ; Easily switch between virtual desktops when in Task View
 
 ;_+_+_
-#IfWinActive Task View ahk_class MultitaskingViewFrame
+#If IsTaskViewActive()
 
 NumpadPgUp::Goto LeftDesktop
 NumpadPgDn::Goto RightDesktop
@@ -335,13 +343,13 @@ XButton2 & WheelRight::Goto RightDesktop
 ; Navigate in task view via mouse hotkeys
 
 ;_+_+_
-#IfWinNotActive Task View ahk_class MultitaskingViewFrame
+#If !IsTaskViewActive()
 
 ; Open task view via XButton2
 *XButton2::Send #{Tab}
 
 ;_+_+_
-#IfWinActive Task View ahk_class MultitaskingViewFrame
+#If IsTaskViewActive()
 
 ; Select current/highlighted task via XButton2
 *XButton2::Send {Enter}
