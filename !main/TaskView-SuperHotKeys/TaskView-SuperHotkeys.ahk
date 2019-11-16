@@ -86,10 +86,10 @@ GoToDesktop(desktopNumber) {
 
 	if (CurrentDesktop < desktopNumber) {
 		TransitionCount := desktopNumber - CurrentDesktop
-		TransitionHotkey = {RCtrl DownTemp}{RWin DownTemp}{Right}{RWin Up}{RCtrl Up}
+		TransitionHotkey = ^#{Right}
 	} else if (CurrentDesktop > desktopNumber) {
 		TransitionCount := CurrentDesktop - desktopNumber
-		TransitionHotkey = {LCtrl DownTemp}{LWin DownTemp}{Left}{LWin Up}{LCtrl Up}
+		TransitionHotkey = ^#{Left}
 	}
 
 	; For a smooth transition
