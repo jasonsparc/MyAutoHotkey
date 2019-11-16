@@ -351,16 +351,8 @@ XButton2 & WheelRight::Goto RightDesktop
 ;_+_+_
 #If IsTaskViewActive()
 
-; Select current/highlighted task via XButton2
-*XButton2::Send {Enter}
-
-;_+_+_
-; Highlight tasks via MouseWheel, when in task view
-
-*WheelUp::Goto LeftTask
-*WheelDown::Goto RightTask
-*WheelLeft::Goto LeftTask
-*WheelRight::Goto RightTask
+; Note: `#{Tab}` wasn't used here to avoid duplicate task view navigation
+*XButton2::Send {Esc}
 
 ;_+_+_
 #If ; End If
