@@ -1,5 +1,6 @@
 
 #Include <file-open-utils>
+#Include <prompt-utils>
 #Include <Functions>
 
 global calc_sheets := "C:\dev\studies\``helper-calc-sheets"
@@ -12,16 +13,6 @@ global StudyWindowPrefs_H := SysGet(62) - 9
 ;global StudyWindowPrefs_H := Round(A_ScreenHeight * 1047/1080)
 
 ;MsgBox %StudyWindowPrefs_X%`t%StudyWindowPrefs_Y%`n%StudyWindowPrefs_W%`t%StudyWindowPrefs_H%
-
-Prompt(AskTitle:="Start Routine", AskMsg:="", HasCancel:=false, ExitOnCancel:=false, ExtraOptions:=0) {
-	MsgBox, % (HasCancel ? 35 : 36) + ExtraOptions, %AskTitle%, %AskMsg%
-	IfMsgBox Yes
-		return true
-	IfMsgBox Cancel
-		If ExitOnCancel
-			Exit
-	return false
-}
 
 PromptStart(CourseName:="", Suffix:="") {
 	if (Not CourseName) {
