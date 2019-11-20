@@ -346,7 +346,7 @@ XButton2 & WheelRight::Goto RightDesktop
 #If !IsTaskViewActive()
 
 ; Open task view via XButton2
-*XButton2::Send #{Tab}
+XButton2::Send #{Tab}
 
 ;_+_+_
 #If IsTaskViewActive()
