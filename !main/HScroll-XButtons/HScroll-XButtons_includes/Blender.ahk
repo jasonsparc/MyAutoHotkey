@@ -45,7 +45,7 @@ Return
 ; Handy mapping for zooming
 XButton1 & MButton::
 If (RequireWinActive(Blender_WinTitle)) {
-	SendInput {ctrl down}{MButton down}
+	SendInput {blind}{ctrl down}{MButton down}
 	Blender_HeldKey_ctrl := Blender_HeldKey_MButton := true
 }
 Return
