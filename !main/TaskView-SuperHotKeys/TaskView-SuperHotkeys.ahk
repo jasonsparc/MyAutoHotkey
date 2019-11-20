@@ -372,7 +372,7 @@ XButton2 & RButton::Send ^!{Tab}
 #IfWinActive Task Switching ahk_class MultitaskingViewFrame
 
 ; Select higlighted task
-XButton2 & RButton up::Send {Enter}
+*~RButton up::Send {Enter}
 
 ; Highlight tasks via MouseWheel, when in Task Switching
 
@@ -380,6 +380,9 @@ XButton2 & WheelUp::Goto LeftTask
 XButton2 & WheelDown::Goto RightTask
 XButton2 & WheelLeft::Goto LeftTask
 XButton2 & WheelRight::Goto RightTask
+
+; Shouldn't activate task view at the moment
+*XButton2::Return
 
 ;_+_+_
 #If ; End If
