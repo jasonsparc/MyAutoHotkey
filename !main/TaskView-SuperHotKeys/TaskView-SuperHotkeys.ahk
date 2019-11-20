@@ -265,7 +265,7 @@ GetSessionId() {
 ; Open Task View via WinKey + AppsKey
 #AppsKey::
 Send {Blind}{Tab}
-KeyWait AppsKey
+KeyWait AppsKey ; Avoids key repeat (due to holding)
 Return
 
 
@@ -326,12 +326,12 @@ F24::GoToDesktop(24)
 
 NumpadClear & NumpadIns::
 Send #{Tab}
-KeyWait NumpadIns
+KeyWait NumpadIns ; Avoids key repeat (due to holding)
 Return
 
 NumpadClear & NumpadEnter::
 Send #{Tab}
-KeyWait NumpadEnter
+KeyWait NumpadEnter ; Avoids key repeat (due to holding)
 Return
 
 ; Switch between virtual desktops via NumpadClear + NumpadPgUp/NumpadPgDn
