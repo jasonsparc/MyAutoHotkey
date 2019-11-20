@@ -75,6 +75,25 @@ RequireWinActive(WinTitle:="", WinText:="", Timeout:=1, ExcludeTitle:="", Exclud
 	}
 }
 
+; Detects whether any primary mouse buttons (i.e., `LButton`, `RButton` and
+; `MButton`) were involved in the hotkey, and if so, delegates call to
+; `RequireWinActive()`, returning its value.
+;
+; Otherwise, for mainly keyboard inputs, returns true only when the target
+; window is active.
+;
+; Use the return value as an indicator of whether a hotkey action should
+; proceed. This allows natural input handling where mouse inputs usually
+; trigger window activation, and keyboard inputs almost never...
+HandleInputsNaturally(ThisHotKey:="", WinTitle:="", WinText:="", Timeout:=1, ExcludeTitle:="", ExcludeText:="") {
+	if (!ThisHotKey)
+		ThisHotKey := A_ThisHotKey
+
+	if ThisHotKey contains LButton, RButton, MButton
+		return RequireWinActive(WinTitle, WinText, Timeout, ExcludeTitle, ExcludeText)
+	return WinActive(WinTitle, WinText, ExcludeTitle, ExcludeText)
+}
+
 ;-=-=-=- * * * -=-=-=-
 ; Custom handler includes
 
