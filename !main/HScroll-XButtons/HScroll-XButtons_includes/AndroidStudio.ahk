@@ -21,7 +21,7 @@ Return
 ; Auto-release held keys regardless of current mouseover
 #If AndroidStudio_HeldKeys
 
-~XButton1 up::
+*~XButton1 up::
 AndroidStudio_HeldKeys := false
 ; Sends a dummy keypress along with the shift key up input, to avoid triggering
 ; ...IntelliJ’s “Search everything” action.

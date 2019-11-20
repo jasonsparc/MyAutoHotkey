@@ -30,7 +30,7 @@ Return
 ; Auto-release held keys regardless of active window or current mouseover
 #If AdobeReader_HeldKeys
 
-~XButton1 up::
+*~XButton1 up::
 AdobeReader_HeldKeys := false
 Send {shift up}
 Return

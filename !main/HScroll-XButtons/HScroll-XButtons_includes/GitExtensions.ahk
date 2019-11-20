@@ -23,7 +23,7 @@ Return
 ; Auto-release held keys regardless of current mouseover
 #If GitExtensions_HeldKeys
 
-~XButton1 up::
+*~XButton1 up::
 GitExtensions_HeldKeys := false
 Send {shift up}
 Return
