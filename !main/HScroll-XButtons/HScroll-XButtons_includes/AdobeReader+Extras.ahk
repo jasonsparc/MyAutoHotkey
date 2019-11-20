@@ -41,12 +41,28 @@ Return
 ; Extras
 ;
 
+#If MouseIsOver(AdobeReader_WinTitle)
+
+; Handy mappings to quickly toggle between the "Hand Tool" and "Select Tool"
+XButton1 & MButton::
+XButton1 & LButton::
+If (RequireWinActive(AdobeReader_WinTitle))
+	Goto AdobeReader_ToggleHandOrSelect
+Return
+
+; Handy mappings to quickly copy "highlight"-objects
+; NOTE: It requires a different handling than a mere `CTRL+C`
+^RButton::
+If (RequireWinActive(AdobeReader_WinTitle))
+	Goto AdobeReader_CopyObjects
+Return
+
+; - - = - = - = - - - +
 #If WinActive(AdobeReader_WinTitle)
 
 ; Handy mappings to quickly toggle between the "Hand Tool" and "Select Tool"
 XButton1 & Space::
-XButton1 & MButton::
-XButton1 & LButton::
+AdobeReader_ToggleHandOrSelect:
 AdobeReader_ToggleHandOrSelect()
 Return
 
@@ -65,7 +81,7 @@ Return
 ; Handy mappings to quickly copy "highlight"-objects
 ; NOTE: It requires a different handling than a mere `CTRL+C`
 XButton1 & c::
-^RButton::
+AdobeReader_CopyObjects:
 Send {Esc}{RButton}c
 Return
 

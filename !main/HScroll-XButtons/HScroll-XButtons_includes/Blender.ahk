@@ -19,19 +19,19 @@ Blender_init() {
 
 XButton1 & WheelUp::
 Send {blind}{ctrl down}{WheelUp %A_EventInfo%}
-Blender_HeldKeys := true
+Blender_HeldKey_ctrl := true
 Return
 
 XButton1 & WheelDown::
 Send {blind}{ctrl down}{WheelDown %A_EventInfo%}
-Blender_HeldKeys := true
+Blender_HeldKey_ctrl := true
 Return
 
-; Auto-release held keys regardless of current mouseover
-#If Blender_HeldKeys
+; Auto-release held key regardless of current mouseover
+#If Blender_HeldKey_ctrl
 
 *~XButton1 up::
-Blender_HeldKeys := false
+Blender_HeldKey_ctrl := false
 SendInput {ctrl up}
 Return
 
@@ -40,11 +40,23 @@ Return
 ; Extras
 ;
 
-#If WinActive(Blender_WinTitle)
+#If MouseIsOver(Blender_WinTitle)
 
 ; Handy mapping for zooming
-XButton1 & MButton::SendInput {ctrl down}{MButton down}
-XButton1 & MButton up::SendInput {ctrl up}{MButton up}
+XButton1 & MButton::
+If (RequireWinActive(Blender_WinTitle)) {
+	SendInput {ctrl down}{MButton down}
+	Blender_HeldKey_ctrl := Blender_HeldKey_MButton := true
+}
+Return
+
+; Auto-release held key regardless of current mouseover
+#If Blender_HeldKey_MButton
+
+*~MButton up::
+Blender_HeldKey_MButton := false
+SendInput {MButton up}
+Return
 
 #If ; End If
 

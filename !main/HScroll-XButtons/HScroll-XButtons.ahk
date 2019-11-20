@@ -58,6 +58,23 @@ StabilizeScroll() {
 		Exit
 }
 
+; A handy utility that activates a window while also waiting for it to do so.
+; Useful for triggering actions only once the window is in focus.
+;
+; Mainly useful for mouse actions, since mouse inputs should always trigger
+; window activation -- i.e., more specifically when the hotkey trigger involves
+; the primary mouse buttons, `LButton`, `RButton` and `MButton`.
+RequireWinActive(WinTitle:="", WinText:="", Timeout:=1, ExcludeTitle:="", ExcludeText:="") {
+	if (WinExist(WinTitle, WinText, ExcludeTitle, ExcludeText)) {
+		if (WinActive())
+			return true
+
+		WinActivate
+		WinWaitActive, , , %Timeout%
+		return !ErrorLevel
+	}
+}
+
 ;-=-=-=- * * * -=-=-=-
 ; Custom handler includes
 
