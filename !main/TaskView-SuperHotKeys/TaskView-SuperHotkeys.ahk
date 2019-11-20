@@ -420,7 +420,7 @@ Return
 #If IsTaskSwitchingActivated()
 
 ; Select higlighted task
-*~RButton up::
+*RButton up::
 if (TaskSwitchingPrepareDeactivation())
 	Send {Enter}
 Return
