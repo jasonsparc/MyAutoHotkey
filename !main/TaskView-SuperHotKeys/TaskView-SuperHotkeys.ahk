@@ -11,7 +11,9 @@ Menu, Tray, Icon, shell32.dll, 319
 
 ;-=-=-=- * * * -=-=-=-
 
-; Common Utilities
+; Common Utilities & Globals
+
+TaskSwitchingActivated := false
 
 ;_+_+_
 Return ; Block execution of utility code below...
@@ -307,14 +309,27 @@ NumpadPgDn::Goto RightDesktop
 ; BONUS: Switch to most recent task
 
 ; Open task switching
-NumpadClear & NumpadSub::Send ^!+{Tab} ; Previous recent task
-NumpadClear & NumpadAdd::Send ^!{Tab} ; Next recent task
+NumpadClear & NumpadSub::
+Send ^!+{Tab} ; Previous recent task
+TaskSwitchingActivated := true
+Return
+
+NumpadClear & NumpadAdd::
+Send ^!{Tab} ; Next recent task
+TaskSwitchingActivated := true
+Return
 
 ;_+_+_
-#IfWinActive Task Switching ahk_class MultitaskingViewFrame
+#If TaskSwitchingActivated || (TaskSwitchingActivated
+	:= WinActive("Task Switching ahk_class MultitaskingViewFrame"))
 
 ; Select higlighted task
-~NumpadClear up::Send {Enter}
+*~NumpadClear up::
+TaskSwitchingActivated := false
+WinWaitActive Task Switching ahk_class MultitaskingViewFrame, , 0.5
+if (!ErrorLevel)
+	Send {Enter}
+Return
 
 ;_+_+_
 #If ; End If
@@ -368,21 +383,22 @@ XButton2::Send #{Tab}
 ; Open task switching
 XButton2 & RButton::
 Send ^!{Tab}
-TaskSwitchingActive := true
+TaskSwitchingActivated := true
 Return
 
 ;_+_+_
-#If TaskSwitchingActive || (TaskSwitchingActive
+#If TaskSwitchingActivated || (TaskSwitchingActivated
 	:= WinActive("Task Switching ahk_class MultitaskingViewFrame"))
 
 ; Select higlighted task
 *~RButton up::
-TaskSwitchingActive := false
-if (WinActive("Task Switching ahk_class MultitaskingViewFrame"))
+TaskSwitchingActivated := false
+WinWaitActive Task Switching ahk_class MultitaskingViewFrame, , 0.5
+if (!ErrorLevel)
 	Send {Enter}
 Return
 
-*~Esc::TaskSwitchingActive := false
+*~Esc::TaskSwitchingActivated := false
 
 ; Highlight tasks via MouseWheel, when in Task Switching
 
