@@ -13,12 +13,11 @@ Menu, Tray, Icon, shell32.dll, 319
 
 ; Common Utilities & Globals
 
-TaskSwitchingActivated := false
+global TaskSwitchingActivated := false
 
 ;_+_+_
 Return ; Block execution of utility code below...
 
-; Utilities for switching between virtual desktops
 
 IsTaskViewActive() {
 	Id := WinExist("A")
@@ -31,6 +30,23 @@ IsTaskViewActive() {
 	}
 	Return 0x0
 }
+
+IsTaskSwitchingActive() {
+	Return WinActive("Task Switching ahk_class MultitaskingViewFrame")
+}
+
+IsTaskSwitchingActivated() {
+	Return TaskSwitchingActivated || (TaskSwitchingActivated := IsTaskSwitchingActive())
+}
+
+TaskSwitchingPrepareDeactivation(Timeout:=0.5) {
+	TaskSwitchingActivated := false
+	WinWaitActive Task Switching ahk_class MultitaskingViewFrame, , %Timeout%
+	return !ErrorLevel
+}
+
+
+; Utilities for switching between virtual desktops
 
 LeftDesktop:  ; Switch to left virtual desktop
 	If (!IsTaskViewActive()) {
@@ -50,6 +66,7 @@ RightDesktop:  ; Switch to right virtual desktop
 	Sleep 180
 Return
 
+
 ; Utilities for highlighting tasks in Task View & Task Switching
 ; -- especially made for "MouseWheel"-related Hotkeys
 
@@ -62,6 +79,7 @@ RightTask:
 	SendInput {Right}
 	Sleep 100
 Return
+
 
 ; Utilities to go to a specific desktop number
 
@@ -320,14 +338,11 @@ TaskSwitchingActivated := true
 Return
 
 ;_+_+_
-#If TaskSwitchingActivated || (TaskSwitchingActivated
-	:= WinActive("Task Switching ahk_class MultitaskingViewFrame"))
+#If IsTaskSwitchingActivated()
 
 ; Select higlighted task
 *~NumpadClear up::
-TaskSwitchingActivated := false
-WinWaitActive Task Switching ahk_class MultitaskingViewFrame, , 0.5
-if (!ErrorLevel)
+if (TaskSwitchingPrepareDeactivation())
 	Send {Enter}
 Return
 
@@ -377,9 +392,6 @@ XButton2::Send #{Tab}
 
 ; BONUS: Switch to most recent task
 
-;_+_+_
-#IfWinNotActive Task Switching ahk_class MultitaskingViewFrame
-
 ; Open task switching
 XButton2 & RButton::
 Send ^!{Tab}
@@ -387,14 +399,11 @@ TaskSwitchingActivated := true
 Return
 
 ;_+_+_
-#If TaskSwitchingActivated || (TaskSwitchingActivated
-	:= WinActive("Task Switching ahk_class MultitaskingViewFrame"))
+#If IsTaskSwitchingActivated()
 
 ; Select higlighted task
 *~RButton up::
-TaskSwitchingActivated := false
-WinWaitActive Task Switching ahk_class MultitaskingViewFrame, , 0.5
-if (!ErrorLevel)
+if (TaskSwitchingPrepareDeactivation())
 	Send {Enter}
 Return
 
