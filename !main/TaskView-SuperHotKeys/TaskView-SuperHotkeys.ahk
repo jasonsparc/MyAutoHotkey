@@ -402,28 +402,8 @@ XButton2 & WheelRight::Goto RightDesktop
 
 ;-=-=-=- * * * -=-=-=-
 
-; Navigate in task view via mouse hotkeys
-
-;_+_+_
-#If !IsTaskViewActivated()
-
 ; Open task view via XButton2
-XButton2::
-Send #{Tab}
-TaskViewActivated := true
-Return
-
-;_+_+_
-#If IsTaskViewActivated()
-
-*XButton2::
-if (TaskViewPrepareDeactivation())
-	; Note: `#{Tab}` wasn't used here to avoid duplicate task view navigation
-	Send {Esc}
-Return
-
-;_+_+_
-#If ; End If
+XButton2::Send #{Tab}
 
 
 ;-=-=-=- * * * -=-=-=-
