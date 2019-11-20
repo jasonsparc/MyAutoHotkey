@@ -13,6 +13,7 @@ Menu, Tray, Icon, shell32.dll, 319
 
 ; Common Utilities & Globals
 
+global TaskViewActivated := false
 global TaskSwitchingActivated := false
 
 ;_+_+_
@@ -31,6 +32,33 @@ IsTaskViewActive() {
 	Return 0x0
 }
 
+IsTaskViewActivated() {
+	Return TaskViewActivated || (TaskViewActivated := IsTaskViewActive())
+}
+
+TaskViewPrepareDeactivation(Timeout:=0.5) {
+	TaskViewActivated := false
+	return TaskViewWaitActive(Timeout)
+}
+
+TaskViewWaitActive(Timeout:=0.5) {
+	if (IsTaskViewActive())
+		return true
+
+	sTickCount := A_TickCount
+	while (Timeout > 0) {
+		WinWaitNotActive A, , %Timeout%
+		if (IsTaskViewActive())
+			return true
+
+		xTickCount := A_TickCount
+		Timeout -= (xTickCount - sTickCount) / 1000
+		sTickCount := xTickCount
+	}
+	return false
+}
+
+
 IsTaskSwitchingActive() {
 	Return WinActive("Task Switching ahk_class MultitaskingViewFrame")
 }
@@ -41,6 +69,10 @@ IsTaskSwitchingActivated() {
 
 TaskSwitchingPrepareDeactivation(Timeout:=0.5) {
 	TaskSwitchingActivated := false
+	return TaskSwitchingWaitActive()
+}
+
+TaskSwitchingWaitActive(Timeout:=0.5) {
 	WinWaitActive Task Switching ahk_class MultitaskingViewFrame, , %Timeout%
 	return !ErrorLevel
 }
@@ -373,16 +405,22 @@ XButton2 & WheelRight::Goto RightDesktop
 ; Navigate in task view via mouse hotkeys
 
 ;_+_+_
-#If !IsTaskViewActive()
+#If !IsTaskViewActivated()
 
 ; Open task view via XButton2
-XButton2::Send #{Tab}
+XButton2::
+Send #{Tab}
+TaskViewActivated := true
+Return
 
 ;_+_+_
-#If IsTaskViewActive()
+#If IsTaskViewActivated()
 
-; Note: `#{Tab}` wasn't used here to avoid duplicate task view navigation
-*XButton2::Send {Esc}
+*XButton2::
+if (TaskViewPrepareDeactivation())
+	; Note: `#{Tab}` wasn't used here to avoid duplicate task view navigation
+	Send {Esc}
+Return
 
 ;_+_+_
 #If ; End If
