@@ -212,8 +212,8 @@ GetSessionId() {
 
 ; Open Task View via WinKey + AppsKey
 #AppsKey::
-	Send {Blind}{Tab}
-	KeyWait AppsKey
+Send {Blind}{Tab}
+KeyWait AppsKey
 Return
 
 
@@ -273,13 +273,13 @@ F24::GoToDesktop(24)
 ; Open Task View via NumpadClear key combinations
 
 NumpadClear & NumpadIns::
-	Send #{Tab}
-	KeyWait NumpadIns
+Send #{Tab}
+KeyWait NumpadIns
 Return
 
 NumpadClear & NumpadEnter::
-	Send #{Tab}
-	KeyWait NumpadEnter
+Send #{Tab}
+KeyWait NumpadEnter
 Return
 
 ; Switch between virtual desktops via NumpadClear + NumpadPgUp/NumpadPgDn
@@ -367,8 +367,8 @@ XButton2::Send #{Tab}
 
 ; Open task switching
 XButton2 & RButton::
-	Send ^!{Tab}
-	TaskSwitchingActive := true
+Send ^!{Tab}
+TaskSwitchingActive := true
 Return
 
 ;_+_+_
@@ -377,9 +377,9 @@ Return
 
 ; Select higlighted task
 *~RButton up::
-	TaskSwitchingActive := false
-	if (WinActive("Task Switching ahk_class MultitaskingViewFrame"))
-		Send {Enter}
+TaskSwitchingActive := false
+if (WinActive("Task Switching ahk_class MultitaskingViewFrame"))
+	Send {Enter}
 Return
 
 *~Esc::TaskSwitchingActive := false
