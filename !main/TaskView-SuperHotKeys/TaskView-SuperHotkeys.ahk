@@ -116,6 +116,13 @@ Return
 ; Utilities to go to a specific desktop number
 
 GoToDesktop(desktopNumber) {
+	OldCritical := A_IsCritical
+	Critical ; Prevent interrupts. Makes our operation atomic! (Sort of)
+	__GoToDesktop_NonAtomic(desktopNumber)
+	Critical %OldCritical%
+}
+
+__GoToDesktop_NonAtomic(desktopNumber) {
 	RegRead, DesktopList, HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops, VirtualDesktopIDs
 
 	if (!DesktopList)
