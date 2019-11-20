@@ -366,13 +366,23 @@ XButton2::Send #{Tab}
 #IfWinNotActive Task Switching ahk_class MultitaskingViewFrame
 
 ; Open task switching
-XButton2 & RButton::Send ^!{Tab}
+XButton2 & RButton::
+	Send ^!{Tab}
+	TaskSwitchingActive := true
+Return
 
 ;_+_+_
-#IfWinActive Task Switching ahk_class MultitaskingViewFrame
+#If TaskSwitchingActive || (TaskSwitchingActive
+	:= WinActive("Task Switching ahk_class MultitaskingViewFrame"))
 
 ; Select higlighted task
-*~RButton up::Send {Enter}
+*~RButton up::
+	TaskSwitchingActive := false
+	if (WinActive("Task Switching ahk_class MultitaskingViewFrame"))
+		Send {Enter}
+Return
+
+*~Esc::TaskSwitchingActive := false
 
 ; Highlight tasks via MouseWheel, when in Task Switching
 
