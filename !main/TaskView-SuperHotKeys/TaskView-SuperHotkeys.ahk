@@ -409,15 +409,18 @@ Return
 
 *~Esc::TaskSwitchingActivated := false
 
+; Shouldn't activate task view at the moment
+*XButton2::Return
+
+;_+_+_
+#If IsTaskSwitchingActive()
+
 ; Highlight tasks via MouseWheel, when in Task Switching
 
 XButton2 & WheelUp::Goto LeftTask
 XButton2 & WheelDown::Goto RightTask
 XButton2 & WheelLeft::Goto LeftTask
 XButton2 & WheelRight::Goto RightTask
-
-; Shouldn't activate task view at the moment
-*XButton2::Return
 
 ;_+_+_
 #If ; End If
