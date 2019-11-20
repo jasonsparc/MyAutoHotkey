@@ -2,7 +2,6 @@
 IsMsgBox(ButtonName) {
 	IfMsgBox %ButtonName%
 		return true
-	return false
 }
 
 Prompt(AskTitle:="Start Routine", AskMsg:="", HasCancel:=false, ExitOnCancel:=false, ExtraOptions:=0) {
@@ -12,5 +11,4 @@ Prompt(AskTitle:="Start Routine", AskMsg:="", HasCancel:=false, ExitOnCancel:=fa
 	IfMsgBox Cancel
 		If ExitOnCancel
 			Exit
-	return false
 }
