@@ -58,21 +58,37 @@ GoToNextDesktop() {
 
 IsWindowOnCurrentDesktop(windowTitle) {
 	WinGet, winHwnd, ID, %windowTitle%
+	return IsWinHwndOnCurrentDesktop(winHwnd)
+}
+
+IsWinHwndOnCurrentDesktop(winHwnd) {
 	return DllCall(IsWindowOnCurrentVirtualDesktopProc, UInt, winHwnd)
 }
 
 GetWindowDesktopNumber(windowTitle) {
 	WinGet, winHwnd, ID, %windowTitle%
+	return GetWinHwndDesktopNumber(winHwnd)
+}
+
+GetWinHwndDesktopNumber(winHwnd) {
 	return DllCall(GetWindowDesktopNumberProc, UInt, winHwnd) + 1
 }
 
 IsWindowPinned(windowTitle) {
 	WinGet, winHwnd, ID, %windowTitle%
+	return IsWinHwndPinned(winHwnd)
+}
+
+IsWinHwndPinned(winHwnd) {
 	return DllCall(IsPinnedWindowProc, UInt, winHwnd)
 }
 
 MoveWindowToDesktop(windowTitle, desktopNumber) {
 	WinGet, winHwnd, ID, %windowTitle%
+	MoveWinHwndToDesktop(winHwnd, desktopNumber)
+}
+
+MoveWinHwndToDesktop(winHwnd, desktopNumber) {
 	DllCall(MoveWindowToDesktopNumberProc, UInt, winHwnd, UInt, _ToRawDesktopNumber(desktopNumber))
 }
 
