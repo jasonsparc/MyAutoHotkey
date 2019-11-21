@@ -89,26 +89,31 @@ IsWinHwndPinned(winHwnd) {
 
 MoveWindowToDesktop(windowTitle, desktopNumber) {
 	WinGet, winHwnd, ID, %windowTitle%
-	MoveWinHwndToDesktop(winHwnd, desktopNumber)
+	return MoveWinHwndToDesktop(winHwnd, desktopNumber)
 }
 
+; Returns 1 on success
 MoveWinHwndToDesktop(winHwnd, desktopNumber) {
-	DllCall(MoveWindowToDesktopNumberProc, "Ptr", winHwnd, "Int", _ToRawDesktopNumber(desktopNumber), "Int")
+	return DllCall(MoveWindowToDesktopNumberProc, "Ptr", winHwnd, "Int", _ToRawDesktopNumber(desktopNumber), "Int")
 }
 
+; Returns the total number of windows moved
 TransferWindowsOfDesktop(fromDesktopNumber, toDesktopNumber) {
 	fromDesktopNumber := _ToRawDesktopNumber(fromDesktopNumber)
 	toDesktopNumber := _ToRawDesktopNumber(toDesktopNumber)
 
 	WinGet, id, List
+	total := 0
 	Loop, %id% {
 		id := id%A_Index%
 		if (DllCall(GetWindowDesktopNumberProc, "Ptr", id, "Int") == fromDesktopNumber) {
-			DllCall(MoveWindowToDesktopNumberProc, "Ptr", id, "Int", toDesktopNumber, "Int")
+			total += DllCall(MoveWindowToDesktopNumberProc, "Ptr", id, "Int", toDesktopNumber, "Int")
 		}
 	}
+	return total
 }
 
+; Returns the total number of windows moved
 TransferWindowsOfCurrentDesktop(toDesktopNumber) {
-	TransferWindowsOfDesktop(GetCurrentDesktop(), toDesktopNumber)
+	return TransferWindowsOfDesktop(GetCurrentDesktop(), toDesktopNumber)
 }
