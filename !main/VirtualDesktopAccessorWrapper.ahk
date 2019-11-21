@@ -56,8 +56,8 @@ GoToNextDesktop() {
 	_GoToRawDesktopNumber(DllCall(GetCurrentDesktopNumberProc, "Int") + 1)
 }
 
-IsWindowOnCurrentDesktop(windowTitle) {
-	WinGet, winHwnd, ID, %windowTitle%
+IsWindowOnCurrentDesktop(winTitle) {
+	WinGet, winHwnd, ID, %winTitle%
 	return IsWinHwndOnCurrentDesktop(winHwnd)
 }
 
@@ -66,8 +66,8 @@ IsWinHwndOnCurrentDesktop(winHwnd) {
 		> 0 ; Since the procedure may return -1 on error
 }
 
-GetWindowDesktopNumber(windowTitle) {
-	WinGet, winHwnd, ID, %windowTitle%
+GetWindowDesktopNumber(winTitle) {
+	WinGet, winHwnd, ID, %winTitle%
 	return GetWinHwndDesktopNumber(winHwnd)
 }
 
@@ -77,8 +77,8 @@ GetWinHwndDesktopNumber(winHwnd) {
 	return DllCall(GetWindowDesktopNumberProc, "Ptr", winHwnd, "Int") + 1
 }
 
-IsWindowPinned(windowTitle) {
-	WinGet, winHwnd, ID, %windowTitle%
+IsWindowPinned(winTitle) {
+	WinGet, winHwnd, ID, %winTitle%
 	return IsWinHwndPinned(winHwnd)
 }
 
@@ -87,8 +87,8 @@ IsWinHwndPinned(winHwnd) {
 		> 0 ; Since the procedure may return -1 on error
 }
 
-MoveWindowToDesktop(windowTitle, desktopNumber) {
-	WinGet, winHwnd, ID, %windowTitle%
+MoveWindowToDesktop(winTitle, desktopNumber) {
+	WinGet, winHwnd, ID, %winTitle%
 	return MoveWinHwndToDesktop(winHwnd, desktopNumber)
 }
 
