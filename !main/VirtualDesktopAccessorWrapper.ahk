@@ -36,24 +36,24 @@ _GoToRawDesktopNumber(desktopNumber) {
 
 GoToDesktopNumber(desktopNumber) {
 	desktopNumber := _ToRawDesktopNumber(desktopNumber)
-	if (DllCall(GetCurrentDesktopNumberProc, "UInt") != desktopNumber)
+	if (DllCall(GetCurrentDesktopNumberProc, "Int") != desktopNumber)
 		_GoToRawDesktopNumber(desktopNumber)
 }
 
 GetCurrentDesktop() {
-	return DllCall(GetCurrentDesktopNumberProc, "UInt") + 1
+	return DllCall(GetCurrentDesktopNumberProc, "Int") + 1
 }
 
 GetDesktopCount() {
-	return DllCall(GetDesktopCountProc, "UInt")
+	return DllCall(GetDesktopCountProc, "Int")
 }
 
 GoToPrevDesktop() {
-	_GoToRawDesktopNumber(DllCall(GetCurrentDesktopNumberProc, "UInt") - 1)
+	_GoToRawDesktopNumber(DllCall(GetCurrentDesktopNumberProc, "Int") - 1)
 }
 
 GoToNextDesktop() {
-	_GoToRawDesktopNumber(DllCall(GetCurrentDesktopNumberProc, "UInt") + 1)
+	_GoToRawDesktopNumber(DllCall(GetCurrentDesktopNumberProc, "Int") + 1)
 }
 
 IsWindowOnCurrentDesktop(windowTitle) {
@@ -62,7 +62,7 @@ IsWindowOnCurrentDesktop(windowTitle) {
 }
 
 IsWinHwndOnCurrentDesktop(winHwnd) {
-	return DllCall(IsWindowOnCurrentVirtualDesktopProc, "UInt", winHwnd)
+	return DllCall(IsWindowOnCurrentVirtualDesktopProc, "Ptr", winHwnd, "Int")
 }
 
 GetWindowDesktopNumber(windowTitle) {
@@ -71,7 +71,7 @@ GetWindowDesktopNumber(windowTitle) {
 }
 
 GetWinHwndDesktopNumber(winHwnd) {
-	return DllCall(GetWindowDesktopNumberProc, "UInt", winHwnd) + 1
+	return DllCall(GetWindowDesktopNumberProc, "Ptr", winHwnd, "Int") + 1
 }
 
 IsWindowPinned(windowTitle) {
@@ -80,7 +80,7 @@ IsWindowPinned(windowTitle) {
 }
 
 IsWinHwndPinned(winHwnd) {
-	return DllCall(IsPinnedWindowProc, "UInt", winHwnd)
+	return DllCall(IsPinnedWindowProc, "Ptr", winHwnd, "Int")
 }
 
 MoveWindowToDesktop(windowTitle, desktopNumber) {
@@ -89,7 +89,7 @@ MoveWindowToDesktop(windowTitle, desktopNumber) {
 }
 
 MoveWinHwndToDesktop(winHwnd, desktopNumber) {
-	DllCall(MoveWindowToDesktopNumberProc, "UInt", winHwnd, "UInt", _ToRawDesktopNumber(desktopNumber))
+	DllCall(MoveWindowToDesktopNumberProc, "Ptr", winHwnd, "Int", _ToRawDesktopNumber(desktopNumber), "Int")
 }
 
 TransferWindowsOfDesktop(fromDesktopNumber, toDesktopNumber) {
@@ -99,8 +99,8 @@ TransferWindowsOfDesktop(fromDesktopNumber, toDesktopNumber) {
 	WinGet, id, List
 	Loop, %id% {
 		id := id%A_Index%
-		if (DllCall(GetWindowDesktopNumberProc, "UInt", id) == fromDesktopNumber) {
-			DllCall(MoveWindowToDesktopNumberProc, "UInt", id, "UInt", toDesktopNumber)
+		if (DllCall(GetWindowDesktopNumberProc, "Ptr", id, "Int") == fromDesktopNumber) {
+			DllCall(MoveWindowToDesktopNumberProc, "Ptr", id, "Int", toDesktopNumber, "Int")
 		}
 	}
 }
