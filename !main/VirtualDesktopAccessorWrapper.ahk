@@ -3,14 +3,14 @@
 ; Must hard code to function correctly with #includes
 LibDir = %A_MyDocuments%\AutoHotkey\!submodules\VirtualDesktopAccessor\x64\Release
 
-hVirtualDesktopAccessor := DllCall("LoadLibrary", Str, LibDir . "\VirtualDesktopAccessor.dll", "Ptr")
-global GoToDesktopNumberProc := DllCall("GetProcAddress", Ptr, hVirtualDesktopAccessor, AStr, "GoToDesktopNumber", "Ptr")
-global GetCurrentDesktopNumberProc := DllCall("GetProcAddress", Ptr, hVirtualDesktopAccessor, AStr, "GetCurrentDesktopNumber", "Ptr")
-global GetDesktopCountProc := DllCall("GetProcAddress", Ptr, hVirtualDesktopAccessor, AStr, "GetDesktopCount", "Ptr")
-global IsWindowOnCurrentVirtualDesktopProc := DllCall("GetProcAddress", Ptr, hVirtualDesktopAccessor, AStr, "IsWindowOnCurrentVirtualDesktop", "Ptr")
-global GetWindowDesktopNumberProc := DllCall("GetProcAddress", Ptr, hVirtualDesktopAccessor, AStr, "GetWindowDesktopNumber", "Ptr")
-global MoveWindowToDesktopNumberProc := DllCall("GetProcAddress", Ptr, hVirtualDesktopAccessor, AStr, "MoveWindowToDesktopNumber", "Ptr")
-global IsPinnedWindowProc := DllCall("GetProcAddress", Ptr, hVirtualDesktopAccessor, AStr, "IsPinnedWindow", "Ptr")
+hVirtualDesktopAccessor := DllCall("LoadLibrary", "Str", LibDir . "\VirtualDesktopAccessor.dll", "Ptr")
+global GoToDesktopNumberProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "GoToDesktopNumber", "Ptr")
+global GetCurrentDesktopNumberProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "GetCurrentDesktopNumber", "Ptr")
+global GetDesktopCountProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "GetDesktopCount", "Ptr")
+global IsWindowOnCurrentVirtualDesktopProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "IsWindowOnCurrentVirtualDesktop", "Ptr")
+global GetWindowDesktopNumberProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "GetWindowDesktopNumber", "Ptr")
+global MoveWindowToDesktopNumberProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "MoveWindowToDesktopNumber", "Ptr")
+global IsPinnedWindowProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "IsPinnedWindow", "Ptr")
 
 _ToRawDesktopNumber(desktopNumber) {
 	maxDesktop := GetDesktopCount()
@@ -31,29 +31,29 @@ _GoToRawDesktopNumber(desktopNumber) {
 		WinActivate ahk_class WorkerW ahk_exe explorer.exe
 
 	; Change desktop
-	DllCall(GoToDesktopNumberProc, Int, desktopNumber)
+	DllCall(GoToDesktopNumberProc, "Int", desktopNumber)
 }
 
 GoToDesktopNumber(desktopNumber) {
 	desktopNumber := _ToRawDesktopNumber(desktopNumber)
-	if (DllCall(GetCurrentDesktopNumberProc, UInt) != desktopNumber)
+	if (DllCall(GetCurrentDesktopNumberProc, "UInt") != desktopNumber)
 		_GoToRawDesktopNumber(desktopNumber)
 }
 
 GetCurrentDesktop() {
-	return DllCall(GetCurrentDesktopNumberProc, UInt) + 1
+	return DllCall(GetCurrentDesktopNumberProc, "UInt") + 1
 }
 
 GetDesktopCount() {
-	return DllCall(GetDesktopCountProc, UInt)
+	return DllCall(GetDesktopCountProc, "UInt")
 }
 
 GoToPrevDesktop() {
-	_GoToRawDesktopNumber(DllCall(GetCurrentDesktopNumberProc, UInt) - 1)
+	_GoToRawDesktopNumber(DllCall(GetCurrentDesktopNumberProc, "UInt") - 1)
 }
 
 GoToNextDesktop() {
-	_GoToRawDesktopNumber(DllCall(GetCurrentDesktopNumberProc, UInt) + 1)
+	_GoToRawDesktopNumber(DllCall(GetCurrentDesktopNumberProc, "UInt") + 1)
 }
 
 IsWindowOnCurrentDesktop(windowTitle) {
@@ -62,7 +62,7 @@ IsWindowOnCurrentDesktop(windowTitle) {
 }
 
 IsWinHwndOnCurrentDesktop(winHwnd) {
-	return DllCall(IsWindowOnCurrentVirtualDesktopProc, UInt, winHwnd)
+	return DllCall(IsWindowOnCurrentVirtualDesktopProc, "UInt", winHwnd)
 }
 
 GetWindowDesktopNumber(windowTitle) {
@@ -71,7 +71,7 @@ GetWindowDesktopNumber(windowTitle) {
 }
 
 GetWinHwndDesktopNumber(winHwnd) {
-	return DllCall(GetWindowDesktopNumberProc, UInt, winHwnd) + 1
+	return DllCall(GetWindowDesktopNumberProc, "UInt", winHwnd) + 1
 }
 
 IsWindowPinned(windowTitle) {
@@ -80,7 +80,7 @@ IsWindowPinned(windowTitle) {
 }
 
 IsWinHwndPinned(winHwnd) {
-	return DllCall(IsPinnedWindowProc, UInt, winHwnd)
+	return DllCall(IsPinnedWindowProc, "UInt", winHwnd)
 }
 
 MoveWindowToDesktop(windowTitle, desktopNumber) {
@@ -89,7 +89,7 @@ MoveWindowToDesktop(windowTitle, desktopNumber) {
 }
 
 MoveWinHwndToDesktop(winHwnd, desktopNumber) {
-	DllCall(MoveWindowToDesktopNumberProc, UInt, winHwnd, UInt, _ToRawDesktopNumber(desktopNumber))
+	DllCall(MoveWindowToDesktopNumberProc, "UInt", winHwnd, "UInt", _ToRawDesktopNumber(desktopNumber))
 }
 
 TransferWindowsOfDesktop(fromDesktopNumber, toDesktopNumber) {
@@ -99,8 +99,8 @@ TransferWindowsOfDesktop(fromDesktopNumber, toDesktopNumber) {
 	WinGet, id, List
 	Loop, %id% {
 		id := id%A_Index%
-		if (DllCall(GetWindowDesktopNumberProc, UInt, id) == fromDesktopNumber) {
-			DllCall(MoveWindowToDesktopNumberProc, UInt, id, UInt, toDesktopNumber)
+		if (DllCall(GetWindowDesktopNumberProc, "UInt", id) == fromDesktopNumber) {
+			DllCall(MoveWindowToDesktopNumberProc, "UInt", id, "UInt", toDesktopNumber)
 		}
 	}
 }
