@@ -63,6 +63,7 @@ IsWindowOnCurrentDesktop(windowTitle) {
 
 IsWinHwndOnCurrentDesktop(winHwnd) {
 	return DllCall(IsWindowOnCurrentVirtualDesktopProc, "Ptr", winHwnd, "Int")
+		> 0 ; Since the procedure may return -1 on error
 }
 
 GetWindowDesktopNumber(windowTitle) {
@@ -70,6 +71,8 @@ GetWindowDesktopNumber(windowTitle) {
 	return GetWinHwndDesktopNumber(winHwnd)
 }
 
+; Can return 0 if the window doesn't belong to any desktop (e.g., pinned) or if
+; an error was encountered.
 GetWinHwndDesktopNumber(winHwnd) {
 	return DllCall(GetWindowDesktopNumberProc, "Ptr", winHwnd, "Int") + 1
 }
@@ -81,6 +84,7 @@ IsWindowPinned(windowTitle) {
 
 IsWinHwndPinned(winHwnd) {
 	return DllCall(IsPinnedWindowProc, "Ptr", winHwnd, "Int")
+		> 0 ; Since the procedure may return -1 on error
 }
 
 MoveWindowToDesktop(windowTitle, desktopNumber) {
