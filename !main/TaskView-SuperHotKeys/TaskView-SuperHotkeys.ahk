@@ -157,8 +157,15 @@ __GoToDesktop_NonAtomic(desktopNumber) {
 	TaskViewWasActive := IsTaskViewActive()
 
 	if (!TaskViewWasActive) {
-		; Avoids sending input events to any active window
+		; Activates the taskbar
 		WinActivate ahk_class Shell_TrayWnd ahk_exe explorer.exe
+		; Also, avoids sending input events (including activation events) to
+		; any active window, which in turn, avoids flashing taskbar buttons.
+		;
+		; Side effect: may not restore the active state of the last active
+		; window in the destination desktop, especially if the transition was
+		; way too fast that many desktops were skipped over. We fix this via a
+		; similar trick: see below.
 	}
 
 	TransitionCount--
@@ -168,8 +175,10 @@ __GoToDesktop_NonAtomic(desktopNumber) {
 	}
 
 	if (!TaskViewWasActive) {
-		; Activates the desktop -- also restores the last active window upon transition.
+		; Activates the desktop
 		WinActivate ahk_class WorkerW ahk_exe explorer.exe
+		; Also restores the last active window upon transition, which may
+		; happen as explained in the comments of our previous trick above.
 	}
 
 	SendInput %TransitionHotkey%
