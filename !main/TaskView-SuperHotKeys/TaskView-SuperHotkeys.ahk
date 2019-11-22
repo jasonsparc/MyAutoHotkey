@@ -81,19 +81,11 @@ TaskSwitchingWaitActive(Timeout:=0.5) {
 ; Utilities for switching between virtual desktops
 
 LeftDesktop:  ; Switch to left virtual desktop
-	If (!IsTaskViewActive()) {
-		; Activates the desktop -- also restores the last active window upon transition.
-		WinActivate ahk_class WorkerW ahk_exe explorer.exe
-	}
 	SendInput {Blind}{LCtrl DownTemp}{LWin DownTemp}{Left}{LWin Up}{LCtrl Up}
 	Sleep 180
 Return
 
 RightDesktop:  ; Switch to right virtual desktop
-	If (!IsTaskViewActive()) {
-		; Activates the desktop -- also restores the last active window upon transition.
-		WinActivate ahk_class WorkerW ahk_exe explorer.exe
-	}
 	SendInput {Blind}{RCtrl DownTemp}{RWin DownTemp}{Right}{RWin Up}{RCtrl Up}
 	Sleep 180
 Return
