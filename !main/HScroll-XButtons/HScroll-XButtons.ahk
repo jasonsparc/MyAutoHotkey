@@ -39,6 +39,11 @@ MouseIsOver(WinTitle) {
 	return WinExist(WinTitle . " ahk_id " . Win)
 }
 
+WinTitleUnderMouse() {
+	MouseGetPos,,, Win
+	return ahk_id %Win%
+}
+
 GetHScrollLines() {
 	; https://autohotkey.com/board/topic/8435-mouse-wheel-speed/
 	; https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947(v=vs.85).aspx
@@ -65,6 +70,9 @@ StabilizeScroll() {
 ; window activation -- i.e., more specifically when the hotkey trigger involves
 ; the primary mouse buttons, `LButton`, `RButton` and `MButton`.
 RequireWinActive(WinTitle:="", WinText:="", Timeout:=1, ExcludeTitle:="", ExcludeText:="") {
+	if (!WinTitle)
+		WinTitle := WinTitleUnderMouse()
+
 	if (WinExist(WinTitle, WinText, ExcludeTitle, ExcludeText)) {
 		if (WinActive())
 			return true
