@@ -24,10 +24,26 @@ _ToRawDesktopNumber(desktopNumber) {
 	return desktopNumber
 }
 
+_IsTaskViewActive() {
+	; Necessary since window classes like "Windows.UI.Core.CoreWindow" are
+	; special and undetectable. See:
+	; - https://www.autohotkey.com/boards/viewtopic.php?t=42517
+	; - https://www.autohotkey.com/boards/viewtopic.php?t=42994
+	id := WinExist("A")
+	If (id) {
+		WinGetTitle winTitle
+		WinGetClass winClass
+		winFullTitle = %winTitle% ahk_class %winClass%
+		If (winFullTitle == "Task View ahk_class Windows.UI.Core.CoreWindow")
+			Return id
+	}
+	Return 0x0
+}
+
 _GoToRawDesktopNumber(desktopNumber) {
 	; Try to avoid flashing task bar buttons, deactivate the current window
-	if (Not(WinActive("Task View ahk_class MultitaskingViewFrame")
-			Or WinActive("ahk_class Shell_TrayWnd ahk_exe explorer.exe")))
+	if (Not(WinActive("ahk_class Shell_TrayWnd ahk_exe explorer.exe")
+			Or _IsTaskViewActive()))
 		WinActivate ahk_class WorkerW ahk_exe explorer.exe
 
 	; Change desktop
