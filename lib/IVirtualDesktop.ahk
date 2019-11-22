@@ -1,1 +1,1 @@
-#Include %A_MyDocuments%\AutoHotkey\!main\IVirtualDesktop.ahk
+#Include %A_MyDocuments%\AutoHotkey\!main\VirtualDesktopUtils\IVirtualDesktop.ahk
