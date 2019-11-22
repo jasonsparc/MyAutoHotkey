@@ -99,6 +99,9 @@ HandleInputsNaturally(ThisHotKey:="", WinTitle:="", WinText:="", Timeout:=1, Exc
 
 	if ThisHotKey contains LButton, RButton, MButton
 		return RequireWinActive(WinTitle, WinText, Timeout, ExcludeTitle, ExcludeText)
+
+	if (!WinTitle)
+		WinTitle := WinTitleUnderMouse()
 	return WinActive(WinTitle, WinText, ExcludeTitle, ExcludeText)
 }
 
