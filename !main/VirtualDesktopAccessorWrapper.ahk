@@ -27,7 +27,7 @@ _ToRawDesktopNumber(desktopNumber) {
 _GoToRawDesktopNumber(desktopNumber) {
 	; Try to avoid flashing task bar buttons, deactivate the current window
 	if (Not(WinActive("Task View ahk_class MultitaskingViewFrame")
-			Or WinActive("WinActivate ahk_class Shell_TrayWnd ahk_exe explorer.exe")))
+			Or WinActive("ahk_class Shell_TrayWnd ahk_exe explorer.exe")))
 		WinActivate ahk_class WorkerW ahk_exe explorer.exe
 
 	; Change desktop
