@@ -21,6 +21,10 @@ Return ; Block execution of utility code below...
 
 
 IsTaskViewActive() {
+	; Necessary since window classes like "Windows.UI.Core.CoreWindow" are
+	; special and undetectable. See:
+	; - https://www.autohotkey.com/boards/viewtopic.php?t=42517
+	; - https://www.autohotkey.com/boards/viewtopic.php?t=42994
 	Id := WinExist("A")
 	If (Id) {
 		WinGetTitle ATitle
