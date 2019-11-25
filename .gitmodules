@@ -16,3 +16,6 @@
 [submodule "!submodules/CSV"]
 	path = !submodules/CSV
 	url = https://github.com/hi5/CSV.git
+[submodule "!submodules/DSVParser-AHK"]
+	path = !submodules/DSVParser-AHK
+	url = https://github.com/jasonsparc/DSVParser-AHK.git
