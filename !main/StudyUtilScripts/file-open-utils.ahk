@@ -169,6 +169,6 @@ EntriesToString(pMap, sSep:="`n") {
 }
 
 GetAbsolutePath(pPath) {
-	Loop %pPath%, 1
+	Loop Files, %pPath%, DF
 		Return A_LoopFileLongPath
 }
