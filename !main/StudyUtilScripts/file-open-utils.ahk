@@ -182,3 +182,40 @@ GetAbsolutePath(pPath) {
 	DllCall("GetFullPathName", "str", pPath, "uint", cc, "str", absPath, "ptr", 0, "uint")
 	return absPath
 }
+
+; Gets relative path, if possible.
+GetRelativePath(pPath) {
+	return GetRelativePathTo(pPath, A_WorkingDir)
+}
+
+; Gets relative path, if possible.
+GetRelativePathTo(pPath, pFromDir) {
+	local ; --
+	; From, https://www.autohotkey.com/boards/viewtopic.php?p=217372#p217372
+	static MAX_PATH := A_IsUnicode ? 520 : 260 ; Double for wide chars if non-ANSI
+	VarSetCapacity(relPath, MAX_PATH)
+	; See, https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathrelativepathtoa
+	; Restrictions: see, https://stackoverflow.com/q/58774168
+	if (DllCall("Shlwapi.dll\PathRelativePathTo"
+		, "Str", relPath
+		, "Str", pFromDir, "UInt", 0x10 ; FILE_ATTRIBUTE_DIRECTORY
+		, "Str", pPath, "UInt", 0x10)) ; FILE_ATTRIBUTE_DIRECTORY also, so that "." is returned if same path
+		return SubStr(relPath, 1, 2) == ".\" ? SubStr(relPath, 3) : relPath
+	return pPath ; No possible relative path (e.g., already relative, different drive letter, etc.)
+}
+
+; Gets relative path, if possible.
+;
+; Path normalization is performed before the
+; relative path resolution process.
+GetCanonRelativePath(pPath) {
+	return GetRelativePathTo(GetAbsolutePath(pPath), A_WorkingDir)
+}
+
+; Gets relative path, if possible.
+;
+; Path normalization is performed before the
+; relative path resolution process.
+GetCanonRelativePathTo(pPath, pFromDir) {
+	return GetRelativePathTo(GetAbsolutePath(pPath), pFromDir)
+}
