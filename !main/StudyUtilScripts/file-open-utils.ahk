@@ -168,7 +168,17 @@ EntriesToString(pMap, sSep:="`n") {
 	return Out
 }
 
-GetAbsolutePath(pPath) {
+GetExistingPath(pPath) {
 	Loop Files, %pPath%, DF
 		Return A_LoopFileLongPath
+}
+
+GetAbsolutePath(pPath) {
+	local ; --
+	; From, https://www.autohotkey.com/boards/viewtopic.php?p=289536#p289536
+	; Also, https://www.autohotkey.com/docs/misc/LongPaths.htm#prefix
+	cc := DllCall("GetFullPathName", "str", pPath, "uint", 0, "ptr", 0, "ptr", 0, "uint")
+	VarSetCapacity(absPath, cc*(A_IsUnicode ? 2 : 1))
+	DllCall("GetFullPathName", "str", pPath, "uint", cc, "str", absPath, "ptr", 0, "uint")
+	return absPath
 }
