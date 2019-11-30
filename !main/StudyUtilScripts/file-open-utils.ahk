@@ -2,6 +2,7 @@
 ; File Open Utilities
 
 ResolveLnk(sTarget, byref sOutLnkParams:="") {
+	local ; --
 	SplitPath, sTarget, , , OutExt
 	if (OutExt = "lnk") {
 		FileGetShortcut %sTarget%, sTarget, , sOutLnkParams
@@ -14,6 +15,7 @@ ResolveLnk(sTarget, byref sOutLnkParams:="") {
 }
 
 OpenWaitHwnd(sTarget, sParams:="", RunState:="", pTimeout:=4, sValidHwndPredicate:="IsValidWinTitleText") {
+	local ; --
 	; -- Find Exe --
 
 	sExe := sTarget
@@ -84,11 +86,13 @@ OpenWaitHwnd(sTarget, sParams:="", RunState:="", pTimeout:=4, sValidHwndPredicat
 ; Additional Utility Functions
 
 GetInternetShortcutUrl(sInternetShortcutFile) {
+	local ; --
 	IniRead OutUrl, %sInternetShortcutFile%, InternetShortcut, Url, %A_Space%
 	Return OutUrl
 }
 
 FindExecutable(sDocument, pMaxPathLen:=260) {
+	local ; --
 	; See, https://stackoverflow.com/a/9540278
 
 	VarSetCapacity(Ret, pMaxPathLen)
@@ -104,11 +108,13 @@ FindExecutable(sDocument, pMaxPathLen:=260) {
 }
 
 GetWinTitleText(sWinTitle) {
+	local ; --
 	WinGetTitle Out, %sWinTitle%
 	return Out
 }
 
 IsValidWinTitleText(sWinTitle) {
+	local ; --
 	WinGetTitle Out, %sWinTitle%
 
 	; Checks if invalid window.
@@ -121,6 +127,7 @@ IsValidWinTitleText(sWinTitle) {
 }
 
 GetValidWinIDs(sWinTitle, sPredicate:="IsValidWinTitleText") {
+	local ; --
 	WinGet FoundIDs, List, %sWinTitle%
 	IDMap := {}
 	i := 0
@@ -136,6 +143,7 @@ GetValidWinIDs(sWinTitle, sPredicate:="IsValidWinTitleText") {
 ; Utility Map Functions
 
 GetNewEntries(pTargetMap, pTestMap) {
+	local ; --
 	Ret := {}
 	i := 0
 	For k,v in pTestMap
@@ -145,6 +153,7 @@ GetNewEntries(pTargetMap, pTestMap) {
 }
 
 FirstKey(pMap) {
+	local ; --
 	For i,v in pMap {
 		return i
 	}
@@ -152,6 +161,7 @@ FirstKey(pMap) {
 }
 
 EntriesToString(pMap, sSep:="`n") {
+	local ; --
 	Out := ""
 	For i,v in pMap
 		Out .= i . " := " . v . sSep
