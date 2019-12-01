@@ -30,6 +30,8 @@ XButton1::Return
 ;-=-=-=- * * * -=-=-=-
 ; Utilities for our custom handler includes
 
+#Include <Functions>
+
 MouseIsOver(WinTitle) {
 	if (!WinTitle)
 		; Fail-fast, since an empty `WinTitle` is probably not on purpose.
@@ -120,6 +122,7 @@ HandleInputsNaturally(ThisHotKey:="", WinTitle:="", WinText:="", Timeout:=1, Exc
 #Include Excel.ahk
 #Include GitExtensions.ahk
 #Include Notepad2.ahk
+#Include SuperMemo-Utils.ahk
 #Include VisualStudio.ahk
 #Include WinMerge.ahk
 
