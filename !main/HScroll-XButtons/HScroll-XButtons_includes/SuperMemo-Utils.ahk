@@ -2,9 +2,16 @@
 ; Just some handy hotkeys for SuperMemo
 ;
 
+#IfWinActive ahk_class TElWind ahk_exe sm18.exe
+
+; Quickly apply a template
+XButton1 & s::
+^s::^+m
+
+; --
+; Only when an HTML component is in focus
 #If WinActive("ahk_class TElWind ahk_exe sm18.exe")
 && SubStr(ControlGetFocus(), 1, 24) == "Internet Explorer_Server"
-; ^- Only when an HTML component is in focus
 
 ; Quick Esc
 XButton1 & MButton::Esc
