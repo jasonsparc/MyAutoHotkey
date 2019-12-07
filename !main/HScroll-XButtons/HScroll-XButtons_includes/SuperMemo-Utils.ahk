@@ -31,5 +31,23 @@ XButton1 & x::!x
 ; -- https://www.reddit.com/r/super_memo/comments/aqma21/
 ^\::Send !+h{Down}
 
+; --
+; Easily make multi-clozed single items. Inspired from,
+; https://masterhowtolearn.wordpress.com/2019/05/26/prettifying-code-snippets-in-supermemo/
+
+; Quick "Parse HTML" over selected text
+XButton1 & 1::
+!1::^+1
+
+; Quickly paste a `<span class="Cloze">[...]</span>`
+XButton1 & 2::
+!2::
+SendRaw, <span class="Cloze">[...]</span>?
+Send, {Left}+{Left 32}^+1{Del}+{Left 5}
+return
+
+; --
+; ...
+
 #If ; End If
 
