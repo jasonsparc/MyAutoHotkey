@@ -42,8 +42,10 @@ XButton1 & 1::
 ; Quickly paste a `<span class="Cloze">[...]</span>`
 XButton1 & 2::
 !2::
+PushCritical()
 SendRaw, <span class="Cloze">[...]</span>?
 Send, {Left}+{Left 32}^+1{Del}+{Left 5}
+PopCritical()
 return
 
 ; --

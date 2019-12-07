@@ -31,6 +31,7 @@ XButton1::Return
 ; Utilities for our custom handler includes
 
 #Include <Functions>
+#Include <CriticalStack>
 
 MouseIsOver(WinTitle) {
 	if (!WinTitle)
