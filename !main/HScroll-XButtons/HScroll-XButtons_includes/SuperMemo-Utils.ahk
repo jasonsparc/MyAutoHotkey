@@ -48,6 +48,47 @@ Send, {Left}+{Left 32}^+1{Del}+{Left 5}
 PopCritical()
 return
 
+; Quickly paste a `<span class="clozed">{{selection}}</span>`
+XButton1 & 3::
+!3::
+PushCritical()
+; KeyWait all held keys before BlockInput -- A tip from the AHK manual
+KeyWait XButton1
+KeyWait Alt
+KeyWait 3
+; Now go!
+BlockInput On
+; --
+SendInput, !z
+SuperMemo_Utils_DoWaitOnWaitCursor()
+SendInput, !{Left}
+SuperMemo_Utils_DoWaitOnWaitCursor()
+SendInput, ^+{Del}
+SuperMemo_Utils_DoWaitOnWaitCursor()
+SendInput, {Enter}
+SuperMemo_Utils_DoWaitOnWaitCursor()
+SendInput, !{Left}
+; --
+BlockInput Off
+PopCritical()
+return
+
+SuperMemo_Utils_DoWaitOnWaitCursor() {
+	local ; --
+	incTick := 300
+	loop {
+		done := true
+		endTick := A_TickCount + incTick
+		while (A_TickCount < endTick) {
+			if (A_Cursor == "Wait") {
+				Sleep 50
+				done := false
+			}
+		}
+		incTick := 100
+	} until done
+}
+
 ; --
 ; ...
 
