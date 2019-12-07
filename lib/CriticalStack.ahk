@@ -1,0 +1,1 @@
+#Include %A_MyDocuments%\AutoHotkey\!main\CommonUtils\CriticalStack.ahk
