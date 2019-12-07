@@ -37,7 +37,7 @@ XButton1 & x::!x
 
 ; Quick "Parse HTML" over selected text
 XButton1 & 1::
-!1::^+1
+!1::Send ^+1
 
 ; Quickly paste a `<span class="Cloze">[...]</span>`
 XButton1 & 2::
