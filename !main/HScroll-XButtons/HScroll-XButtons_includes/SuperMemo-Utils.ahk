@@ -58,7 +58,7 @@ XButton1 & 1::
 ; Quickly paste a `<span class="Cloze">[...]</span>`
 XButton1 & 2::
 !2::
-Critical
+Thread, Priority, 1000 ; Only one instance! No Buffering!
 SendRaw, <span class="Cloze">[...]</span>?
 Send, {Left}+{Left 32}^+1{Del}+{Left 5}
 return
@@ -66,7 +66,7 @@ return
 ; Quickly paste a `<span class="clozed">{{selection}}</span>`
 XButton1 & 3::
 !3::
-Critical
+Thread, Priority, 1000 ; Only one instance! No Buffering!
 ; KeyWait all held keys before BlockInput -- A tip from the AHK manual
 KeyWait XButton1
 KeyWait Alt
