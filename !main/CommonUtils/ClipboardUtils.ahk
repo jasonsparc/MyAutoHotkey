@@ -33,3 +33,16 @@ ClipWait(Timeout:="", WaitForAnyData:="") {
 	ClipWait, %Timeout%, %WaitForAnyData%
 	return ErrorLevel
 }
+
+ClipWaitText(ExpectedText, Timeout:=0.5) {
+	local ; --
+	Timeout := Timeout+0 ? Max(Timeout*1000, 500) : 500
+	EndTick := A_TickCount + Timeout
+	ClipWait, %Timeout%, 1
+	while (Clipboard != ExpectedText) {
+		Sleep 50
+		if (A_TickCount >= EndTick)
+			return Clipboard != ExpectedText
+	}
+	return false
+}
