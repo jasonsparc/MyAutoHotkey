@@ -18,7 +18,7 @@ ClipboardPop() {
 	___Clipboard_PseudoStack--
 }
 
-GetSelectedText(Timeout:=1) {
+GetSelectedText(Timeout:="") {
 	local ; --
 	tmp := ClipboardAll
 	Clipboard := ""
