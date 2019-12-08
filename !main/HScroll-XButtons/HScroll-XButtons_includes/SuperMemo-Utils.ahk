@@ -16,6 +16,13 @@ SendRaw Reference: Edit
 Send {Enter}
 return
 
+; Fixes issues with CTRL+V (and possibly CTRL+C as well) -- The issue is mainly
+; that when you paste something, 'v' would also be typed sometimes.
+^c::Send ^{Ins}
+^v::Send +{Ins}
+XButton1 & RButton::^Ins
+XButton1 & LButton::+Ins
+
 ; --
 ; Only when an HTML component is in focus
 #If WinActive("ahk_class TElWind ahk_exe sm18.exe")
