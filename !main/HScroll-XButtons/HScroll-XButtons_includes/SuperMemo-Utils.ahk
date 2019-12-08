@@ -18,6 +18,7 @@ XButton1 & MButton::Esc
 
 ; Quick edit file
 XButton1 & `::
+^`::
 !`::Send ^{F9}
 
 ; Cloze via mouse
