@@ -58,16 +58,16 @@ XButton1 & 1::
 ; Quickly paste a `<span class="Cloze">[...]</span>`
 XButton1 & 2::
 !2::
-PushCritical()
+CriticalPush()
 SendRaw, <span class="Cloze">[...]</span>?
 Send, {Left}+{Left 32}^+1{Del}+{Left 5}
-PopCritical()
+CriticalPop()
 return
 
 ; Quickly paste a `<span class="clozed">{{selection}}</span>`
 XButton1 & 3::
 !3::
-PushCritical()
+CriticalPush()
 ; KeyWait all held keys before BlockInput -- A tip from the AHK manual
 KeyWait XButton1
 KeyWait Alt
@@ -86,7 +86,7 @@ SuperMemo_Utils_DoWaitOnWaitCursor()
 SendInput, !{Left}
 ; --
 BlockInput Off
-PopCritical()
+CriticalPop()
 return
 
 SuperMemo_Utils_DoWaitOnWaitCursor() {

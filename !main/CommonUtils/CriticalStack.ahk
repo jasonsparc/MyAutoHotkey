@@ -2,19 +2,19 @@
 ; settings for a later restoration.
 ;
 
-global ___CriticalStack
+global ___Critical_Stack
 
-PushCritical(OnOffNumeric:="On") {
-	if (!___CriticalStack)
-		___CriticalStack := {}
+CriticalPush(OnOffNumeric:="On") {
+	if (!___Critical_Stack)
+		___Critical_Stack := {}
 
-	___CriticalStack.Push(A_IsCritical)
+	___Critical_Stack.Push(A_IsCritical)
 	Critical, %OnOffNumeric%
 }
 
-PopCritical() {
-	if (!___CriticalStack.Length())
+CriticalPop() {
+	if (!___Critical_Stack.Length())
 		return
 
-	Critical, % ___CriticalStack.Pop()
+	Critical, % ___Critical_Stack.Pop()
 }
