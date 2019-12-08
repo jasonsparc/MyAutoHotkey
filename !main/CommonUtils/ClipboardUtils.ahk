@@ -18,12 +18,12 @@ ClipboardPop() {
 	___Clipboard_PseudoStack--
 }
 
-GetSelectedText(Timeout:="") {
+GetSelectedText(Timeout:=1) {
 	local ; --
 	tmp := ClipboardAll
 	Clipboard := ""
 	SendInput, ^c
-	ClipWait, %Timeout%
+	ClipWait, % Timeout+0 ? Timeout : 1
 	ret := ErrorLevel ? "" : Clipboard
 	Clipboard := tmp
 	return ret
