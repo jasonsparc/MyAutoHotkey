@@ -6,6 +6,8 @@ global ___Critical_Stack
 
 CriticalPush(OnOffNumeric:="On") {
 	if (!___Critical_Stack)
+		; If you're concerned about the performance over `pseudo-arrays`, see,
+		; https://autohotkey.com/board/topic/78955-array-performance/
 		___Critical_Stack := []
 
 	___Critical_Stack.Push(A_IsCritical)
