@@ -2,11 +2,19 @@
 ; Just some handy hotkeys for SuperMemo
 ;
 
+; SuperMemo Element Window
 #IfWinActive ahk_class TElWind ahk_exe sm18.exe
 
 ; Quickly apply a template
 XButton1 & s::
 ^s::^+m
+
+; Quickly edit references
+XButton1 & r::
+Send ^{Enter}
+SendRaw Reference: Edit
+Send {Enter}
+return
 
 ; --
 ; Only when an HTML component is in focus
