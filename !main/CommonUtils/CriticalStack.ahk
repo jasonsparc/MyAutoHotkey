@@ -20,3 +20,20 @@ CriticalPop() {
 
 	Critical, % ___Critical_Stack.Pop()
 }
+
+global ___BatchLines_Stack
+
+BatchLinesPush(BatchLines:=-1) {
+	if (!___BatchLines_Stack)
+		___BatchLines_Stack := []
+
+	___BatchLines_Stack.Push(A_IsCritical)
+	SetBatchLines, %BatchLines%
+}
+
+BatchLinesPop() {
+	if (!___BatchLines_Stack.Length())
+		return
+
+	SetBatchLines, % ___BatchLines_Stack.Pop()
+}
