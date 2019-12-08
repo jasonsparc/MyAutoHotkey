@@ -28,3 +28,8 @@ GetSelectedText(Timeout:=1) {
 	Clipboard := tmp
 	return ret
 }
+
+ClipWait(Timeout:="", WaitForAnyData:="") {
+	ClipWait, %Timeout%, %WaitForAnyData%
+	return ErrorLevel
+}
