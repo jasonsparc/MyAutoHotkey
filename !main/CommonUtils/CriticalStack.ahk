@@ -6,7 +6,7 @@ global ___Critical_Stack
 
 CriticalPush(OnOffNumeric:="On") {
 	if (!___Critical_Stack)
-		___Critical_Stack := {}
+		___Critical_Stack := []
 
 	___Critical_Stack.Push(A_IsCritical)
 	Critical, %OnOffNumeric%
