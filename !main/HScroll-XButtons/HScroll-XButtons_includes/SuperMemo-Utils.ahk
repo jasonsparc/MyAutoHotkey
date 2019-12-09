@@ -66,64 +66,36 @@ Sleep 100
 ClipboardPop()
 return
 
-; Quickly paste a `<span class="clozed">{{selection}}</span>`
+; --
+; Only when editing an HTML component via Notepad2
+#If WinActive("ahk_class Notepad2 ahk_exe Notepad2.exe")
+&& WinGetTitle() ~= "Si)^(?:\* )?\d+\.HTML? \[[A-Z]:\\supermemo\\systems\\[^\\]+\\elements(?:\\|\] - Notepad2-mod$)"
+
+; Quickly paste a `<span class="Cloze">[...]</span>`
+XButton1 & 2::
+!2::
+Thread, Priority, 1000 ; Only one instance! No Buffering!
+ClipboardPush()
+Clipboard = <span class="Cloze">[...]</span>
+Send, ^v
+Sleep 100
+ClipboardPop()
+return
+
+; Quickly enclose selection within a `<span class="clozed">...</span>`
 XButton1 & 3::
 !3::
 Thread, Priority, 1000 ; Only one instance! No Buffering!
-; KeyWait all held keys before BlockInput -- A tip from the AHK manual
-KeyWait XButton1
-KeyWait Alt
-KeyWait 3
-; Now go!
-BlockInput On
-SuperMemo_Utils_ClozedSpanSel()
-BlockInput Off
+SuperMemoUtils_Sel := GetSelectedText()
+if (SuperMemoUtils_Sel == "")
+	return
+ClipboardPush()
+Clipboard := "<span class=""clozed"">" SuperMemoUtils_Sel "</span>"
+SuperMemoUtils_Sel := ""
+Send, ^v
+Sleep 100
+ClipboardPop()
 return
-
-SuperMemo_Utils_ClozedSpanSel() {
-	local ; --
-	ClipboardPush()
-	Send, +{Del} ; Cut
-	if (ClipWait(0.2, 1) && (selLen := StrLen(selTxt := Clipboard))) {
-		sel := ClipboardAll
-		Clipboard = <span class="clozed">||</span>
-		Sleep 100 ; Give enough time for the `Clipboard` to get unlocked
-		Send, {AppsKey}xp+{Left}+{Del}
-		if (ClipWaitText("|", 0.2)) {
-			Clipboard := sel
-			Sleep 100 ; Give enough time for the `Clipboard` to get unlocked
-			Send, {Shift down}{Ins}
-			KeyWait Ins, L ; Prevent `Insert` key from being interpreted as pressed alone
-			Sleep 50 ; Give enough time for SuperMemo to breathe
-			Send, {Shift up}
-			; Multi-line selections not supported; Manual intervention required
-			if selTxt not contains `r,`n
-			{
-				Send, % "{Left " selLen "}"
-				Send, {Backspace}
-				Send, % "{Right " selLen "}"
-			}
-		}
-	}
-	Sleep 100
-	ClipboardPop()
-}
-
-SuperMemo_Utils_DoWaitOnWaitCursor() {
-	local ; --
-	incTick := 300
-	loop {
-		done := true
-		endTick := A_TickCount + incTick
-		while (A_TickCount < endTick) {
-			if (A_Cursor == "Wait") {
-				Sleep 50
-				done := false
-			}
-		}
-		incTick := 100
-	} until done
-}
 
 ; --
 ; ...
