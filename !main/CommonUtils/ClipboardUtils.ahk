@@ -31,7 +31,7 @@ GetSelectedText(Timeout:=1) {
 
 ClipWait(Timeout:="", WaitForAnyData:="") {
 	ClipWait, %Timeout%, %WaitForAnyData%
-	return ErrorLevel
+	return !ErrorLevel
 }
 
 ClipWaitText(ExpectedText, Timeout:=0.5) {
@@ -42,7 +42,7 @@ ClipWaitText(ExpectedText, Timeout:=0.5) {
 	while (Clipboard != ExpectedText) {
 		Sleep 50
 		if (A_TickCount >= EndTick)
-			return Clipboard != ExpectedText
+			return Clipboard == ExpectedText
 	}
-	return false
+	return true
 }
