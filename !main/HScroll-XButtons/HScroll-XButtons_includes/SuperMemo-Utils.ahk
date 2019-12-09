@@ -59,8 +59,11 @@ XButton1 & 1::
 XButton1 & 2::
 !2::
 Thread, Priority, 1000 ; Only one instance! No Buffering!
-SendRaw, <span class="Cloze">[...]</span>?
-Send, {Left}+{Left 32}^+1{Del}+{Left 5}
+ClipboardPush()
+Clipboard = <span class="Cloze">[...]</span>
+Send, {AppsKey}xp
+Sleep 100
+ClipboardPop()
 return
 
 ; Quickly paste a `<span class="clozed">{{selection}}</span>`
@@ -73,19 +76,38 @@ KeyWait Alt
 KeyWait 3
 ; Now go!
 BlockInput On
-; --
-SendInput, !z
-SuperMemo_Utils_DoWaitOnWaitCursor()
-SendInput, !{Left}
-SuperMemo_Utils_DoWaitOnWaitCursor()
-SendInput, ^+{Del}
-SuperMemo_Utils_DoWaitOnWaitCursor()
-SendInput, {Enter}
-SuperMemo_Utils_DoWaitOnWaitCursor()
-SendInput, !{Left}
-; --
+SuperMemo_Utils_ClozedSpanSel()
 BlockInput Off
 return
+
+SuperMemo_Utils_ClozedSpanSel() {
+	local ; --
+	ClipboardPush()
+	Send, +{Del} ; Cut
+	if (ClipWait(0.2, 1) && (selLen := StrLen(selTxt := Clipboard))) {
+		sel := ClipboardAll
+		Clipboard = <span class="clozed">||</span>
+		Sleep 100 ; Give enough time for the `Clipboard` to get unlocked
+		Send, {AppsKey}xp+{Left}+{Del}
+		if (ClipWaitText("|", 0.2)) {
+			Clipboard := sel
+			Sleep 100 ; Give enough time for the `Clipboard` to get unlocked
+			Send, {Shift down}{Ins}
+			KeyWait Ins, L ; Prevent `Insert` key from being interpreted as pressed alone
+			Sleep 50 ; Give enough time for SuperMemo to breathe
+			Send, {Shift up}
+			; Multi-line selections not supported; Manual intervention required
+			if selTxt not contains `r,`n
+			{
+				Send, % "{Left " selLen "}"
+				Send, {Backspace}
+				Send, % "{Right " selLen "}"
+			}
+		}
+	}
+	Sleep 100
+	ClipboardPop()
+}
 
 SuperMemo_Utils_DoWaitOnWaitCursor() {
 	local ; --

@@ -32,6 +32,7 @@ XButton1::Return
 
 #Include <Functions>
 #Include <CriticalStack>
+#Include <ClipboardUtils>
 
 MouseIsOver(WinTitle) {
 	if (!WinTitle)
