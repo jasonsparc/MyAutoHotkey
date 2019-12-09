@@ -26,6 +26,7 @@ GetSelectedText(Timeout:=1) {
 	ClipWait, % Timeout+0 ? Timeout : 1
 	ret := ErrorLevel ? "" : Clipboard
 	Clipboard := tmp
+	tmp := "" ; Free the memory in case the clipboard was very large
 	return ret
 }
 
