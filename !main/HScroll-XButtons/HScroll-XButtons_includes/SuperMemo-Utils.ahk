@@ -61,7 +61,7 @@ XButton1 & 2::
 Thread, Priority, 1000 ; Only one instance! No Buffering!
 ClipboardPush()
 Clipboard = <span class="Cloze">[...]</span>
-Send, {AppsKey}xp
+Send, {Alt down}{F12}xp{Alt up}
 Sleep 100
 ClipboardPop()
 return
