@@ -68,7 +68,8 @@ return
 
 ; --
 ; Only when editing an HTML component via Notepad2
-#If WinActive("ahk_class Notepad2 ahk_exe Notepad2.exe")
+#If WinExist("ahk_class TElWind ahk_exe sm18.exe")
+&& WinActive("ahk_class Notepad2 ahk_exe Notepad2.exe")
 && WinGetTitle() ~= "Si)^(?:\* )?\d+\.HTML? \[[A-Z]:\\supermemo\\systems\\[^\\]+\\elements(?:\\|\] - Notepad2-mod$)"
 
 ; Quickly paste a `<span class="Cloze">[...]</span>`
