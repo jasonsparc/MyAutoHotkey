@@ -7,14 +7,22 @@
 ; - https://stackoverflow.com/a/30558011
 ; - https://stackoverflow.com/q/6800467
 ; - https://www.w3.org/TR/xml/#NT-Char
-XMLEncode(value, quotesEncoded:=false) {
+;
+; Regarding the treatment of line breaks:
+; - https://stackoverflow.com/q/7277
+XMLEncode(value, quotesEncoded:=false, lineBreaksEncoded:=true) {
 	local ; --
+	; Line break characters. See:
+	; - https://en.wikipedia.org/wiki/Newline#Unicode
+	; - https://docs.python.org/3/library/stdtypes.html#str.splitlines
+	static NLChars := "`r`n`v`f" chr(0x85) chr(0x1E) chr(0x1D) chr(0x1C) chr(0x2028) chr(0x2029)
+	; --
 	out := ""
 	prev := 1
 	regexNeedle := "S)"
 		. "[" chr(0xD800) "-" chr(0xDBFF) "][" chr(0xDC00) "-" chr(0xDFFF) "]|" ; Surrogate Pair
 		. "[&<>" (quotesEncoded ? "'""" : "") "]|"
-		. "[^ -~]" ; Match everything outside of normal chars
+		. "[^ -~" (lineBreaksEncoded ? "" : NLChars ) "]" ; Match everything outside of normal chars
 	while (cur := RegExMatch(value, regexNeedle, m, prev)) {
 		out .= SubStr(value, prev, cur-prev)
 		switch m
