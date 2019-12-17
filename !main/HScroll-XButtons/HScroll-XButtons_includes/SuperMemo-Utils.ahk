@@ -16,6 +16,15 @@ SendRaw Reference: Edit
 Send {Enter}
 return
 
+; Quickly delete all components
+XButton1 & Del::
+!Del::
+Send {Alt down}{F10}d{Alt up}
+WinWait Select ahk_class TChecksDlg ahk_exe sm18.exe, , 1
+if (!ErrorLevel) ; Proceed only if there were components to delete
+	Send ^a{Enter}
+return
+
 ; Fixes issues with CTRL+V (and possibly CTRL+C as well) -- The issue is mainly
 ; that when you paste something, 'v' would also be typed sometimes.
 ^c::Send ^{Ins}
