@@ -32,6 +32,12 @@ return
 XButton1 & RButton::^Ins
 XButton1 & LButton::+Ins
 
+; Convenient alternatives for history navigation
+XButton1 & Left::Send !{Left}
+XButton1 & Right::Send !{Right}
+!Up::
+XButton1 & Up::Send ^{Up}
+
 ; --
 ; Only when an HTML component is in focus
 #If WinActive("ahk_class TElWind ahk_exe sm18.exe")
