@@ -64,12 +64,12 @@ XButton1 & x::!x
 XButton1 & 1::
 !1::Send ^+1
 
-; Quickly paste a `<span class="Cloze">[...]</span>`
+; Quickly paste a `<SPAN class=cloze>[...]</SPAN>`
 XButton1 & 2::
 !2::
 Thread, Priority, 1000 ; Only one instance! No Buffering!
 ClipboardPush()
-Clipboard = <span class="Cloze">[...]</span>
+Clipboard = <SPAN class=cloze>[...]</SPAN>
 Send, {Alt down}{F12}xp{Alt up}
 Sleep 100
 ClipboardPop()
@@ -81,18 +81,18 @@ return
 && WinActive("ahk_class Notepad2 ahk_exe Notepad2.exe")
 && WinGetTitle() ~= "Si)^(?:\* )?\d+\.HTML? \[[A-Z]:\\supermemo\\systems\\[^\\]+\\elements(?:\\|\] - Notepad2-mod$)"
 
-; Quickly paste a `<span class="Cloze">[...]</span>`
+; Quickly paste a `<SPAN class=cloze>[...]</SPAN>`
 XButton1 & 2::
 !2::
 Thread, Priority, 1000 ; Only one instance! No Buffering!
 ClipboardPush()
-Clipboard = <span class="Cloze">[...]</span>
+Clipboard = <SPAN class=cloze>[...]</SPAN>
 Send, ^v
 Sleep 100
 ClipboardPop()
 return
 
-; Quickly enclose selection within a `<span class="clozed">...</span>`
+; Quickly enclose selection within a `<SPAN class=clozed>...</SPAN>`
 XButton1 & 3::
 !3::
 Thread, Priority, 1000 ; Only one instance! No Buffering!
@@ -100,7 +100,7 @@ SuperMemoUtils_Sel := GetSelectedText()
 if (SuperMemoUtils_Sel == "")
 	return
 ClipboardPush()
-Clipboard := "<span class=""clozed"">" SuperMemoUtils_Sel "</span>"
+Clipboard := "<SPAN class=clozed>" SuperMemoUtils_Sel "</SPAN>"
 SuperMemoUtils_Sel := ""
 Send, ^v
 Sleep 100
