@@ -32,11 +32,13 @@ return
 XButton1 & RButton::^Ins
 XButton1 & LButton::+Ins
 
-; Convenient alternatives for history navigation
+; Convenient alternatives for history and general navigation
 XButton1 & Left::Send !{Left}
 XButton1 & Right::Send !{Right}
 !Up::
 XButton1 & Up::Send ^{Up}
+XButton1 & PgUp::Send !{PgUp} ; Note: we could simply press PgUp when no component is in focus
+XButton1 & PgDn::Send !{PgDn} ; Note: same as above
 
 ; --
 ; Only when an HTML component is in focus
