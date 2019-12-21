@@ -7,9 +7,16 @@ Gosub InitSetup
 
 !#d::
 ~XButton1 & d::
+	KeyWait d
+	KeyWait Alt
+	KeyWait LWin
+	KeyWait RWin
+	KeyWait XButton1
+	;BlockInput on
 	OutHwnd := OpenWaitHwnd("chrome.exe", "--new-window")
 	HandleStudyWinPos(OutHwnd, 1)
 	Send % "define "
+	;BlockInput off
 Return
 
 ; -------------------------------------------------------------------------
