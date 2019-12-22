@@ -42,7 +42,7 @@ InitAhkStartupFiles(pLoopDir:=".\!startup\*", pAhkExe:="AutoHotkey.exe") {
 		if (Ext = "LNK") {
 			FileGetShortcut %Target%, Target, RunDir, OutArgs, , , , OutState
 			SplitPath Target, , , Ext
-			QTarget := OutArgs ? """" Target """ " OutArgs """" : """" Target """"
+			QTarget := OutArgs ? """" Target """ " OutArgs : """" Target """"
 
 			if (OutState = 3) {
 				RunState = Max
