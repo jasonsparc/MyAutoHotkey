@@ -1,6 +1,11 @@
 ﻿
 global ___Clipboard_PseudoStack ; `ClipboardAll` breaks on non-pseudo-arrays
 
+___ClipboardUtils_init() {
+	static _ := ___ClipboardUtils_init()
+	___Clipboard_PseudoStack := 0
+}
+
 ClipboardPush(NewText:="") {
 	local tmp ; Necessary, otherwise the code below won't work.
 	tmp := ClipboardAll
