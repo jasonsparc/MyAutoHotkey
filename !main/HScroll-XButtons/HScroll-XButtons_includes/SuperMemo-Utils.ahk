@@ -2,6 +2,7 @@
 ; Just some handy hotkeys for SuperMemo
 ;
 
+; --
 ; SuperMemo Element Window
 #IfWinActive ahk_class TElWind ahk_exe sm18.exe
 
@@ -31,6 +32,11 @@ return
 ^v::Send +{Ins}
 XButton1 & RButton::^Ins
 XButton1 & LButton::+Ins
+
+; --
+; SuperMemo Element Window and/or Content Window
+#If WinActive("ahk_exe sm18.exe")
+&& (WinActive("ahk_class TElWind") || WinActive("ahk_class TContents"))
 
 ; Convenient alternatives for history and general navigation
 XButton1 & Left::Send !{Left}
