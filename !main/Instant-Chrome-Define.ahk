@@ -13,7 +13,8 @@ Gosub InitSetup
 	OutHwnd := OpenWaitHwnd("chrome.exe", "--new-window")
 	if (OutHwnd) {
 		HandleStudyWinPos(OutHwnd, 1)
-		WinWaitActive ahk_id %OutHwnd%, , 1
+		WinActivate, ahk_id %OutHwnd%
+		WinWaitActive, , , 1
 		if (!ErrorLevel)
 			Send % "define "
 	}
