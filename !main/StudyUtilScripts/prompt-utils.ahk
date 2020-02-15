@@ -12,3 +12,12 @@ Prompt(AskTitle:="Start Routine", AskMsg:="", HasCancel:=false, ExitOnCancel:=fa
 		If ExitOnCancel
 			Exit
 }
+
+ShowNotice(Title) {
+	if (Title) {
+		Progress, A M T zh0 zx10 zy10 fs8 cwFFFFFF ct000000, %Title%
+		WinActivate ahk_class AutoHotkey2
+	} else {
+		Progress, Off
+	}
+}
