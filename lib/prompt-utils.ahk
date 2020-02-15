@@ -1,1 +1,1 @@
-#Include %A_MyDocuments%\AutoHotkey\!main\StudyUtilScripts\prompt-utils.ahk
+#Include %A_MyDocuments%\AutoHotkey\!main\CommonUtils\prompt-utils.ahk
