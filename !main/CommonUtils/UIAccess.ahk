@@ -19,9 +19,11 @@ EnsureUIAccess() {
 
 RestartWithUIAccess() {
 	SplitPath A_AhkPath, _, AhkInstallDir
-	Loop, Files, %AhkInstallDir%\AutoHotkey*_UIA.exe
-	{
-		AhkExe := A_LoopFileLongPath
+	AhkExe := AhkInstallDir "\"
+		. (A_PtrSize == 8 ? "AutoHotkeyU64_UIA.exe" : "AutoHotkey"
+			. (A_IsUnicode ? "U" : "A") "32_UIA.exe")
+
+	if (FileExist(AhkExe)) {
 		ArgsPart := ""
 		for _, v in A_Args {
 			if (SubStr(v, StrLen(v), 1) == "\")
@@ -31,6 +33,7 @@ RestartWithUIAccess() {
 		Run "%AhkExe%" "%A_ScriptFullPath%"%ArgsPart%
 		ExitApp
 	}
+
 	MsgBox, % 0x10, , Error: Cannot run with UI Access.`nExecutable ``AutoHotkey*_UIA.exe`` not found.
 	ExitApp
 }
