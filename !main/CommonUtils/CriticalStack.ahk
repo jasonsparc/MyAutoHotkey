@@ -27,7 +27,7 @@ BatchLinesPush(BatchLines:=-1) {
 	if (!___BatchLines_Stack)
 		___BatchLines_Stack := []
 
-	___BatchLines_Stack.Push(A_IsCritical)
+	___BatchLines_Stack.Push(A_BatchLines)
 	SetBatchLines, %BatchLines%
 }
 
