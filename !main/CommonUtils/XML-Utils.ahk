@@ -132,11 +132,12 @@ XMLBalancedFind(Haystack, ExactStartTag, CaseSensitive:=true, StartPos:=1, Liter
 		caseSenseOpt := CaseSensitive ? "" : "(?i)"
 		; Also, take into account comments and CDATA sections
 		static cdataOrCommentPatt := "<!(?:\[CDATA\[.*?\]\]|--.*?--)>"
+		static UCP := A_IsUnicode ? "(*UCP)" : ""
 
-		startTagNeedle := "Ss)(*UCP)" cdataOrCommentPatt
+		startTagNeedle := "Ss)" UCP cdataOrCommentPatt
 			. "|(?P<StartTag>" caseSenseOpt startTagNeedle ")"
 
-		balancedTagNeedle := "Ss)(*UCP)" cdataOrCommentPatt ""
+		balancedTagNeedle := "Ss)" UCP cdataOrCommentPatt ""
 			. "|(?P<InnerStartTag>" caseSenseOpt "<" targetTagNamePatt "(?:\s+" attrPatt ")*\s*>)"
 			. "|(?P<EndTag>" caseSenseOpt "</" targetTagNamePatt "\s*>)"
 
