@@ -46,6 +46,23 @@ XButton1 & Up::Send ^{Up}
 XButton1 & PgUp::Send !{PgUp} ; Note: we could simply press PgUp when no component is in focus
 XButton1 & PgDn::Send !{PgDn} ; Note: same as above
 
+XButton1 & Tab::Send % GetKeyState("Shift") ? "!{PgUp}" : "!{PgDn}"
+
+; ^--
+#If WinActive("ahk_exe sm18.exe")
+&& (WinActive("ahk_class TElWind") || WinActive("ahk_class TContents"))
+&& GetKeyState("Shift")
+
+XButton1 & WheelUp::
+Send !{PgUp}
+Sleep 300
+return
+
+XButton1 & WheelDown::
+Send !{PgDn}
+Sleep 300
+return
+
 ; --
 ; Only when an HTML component is in focus
 #If WinActive("ahk_class TElWind ahk_exe sm18.exe")
