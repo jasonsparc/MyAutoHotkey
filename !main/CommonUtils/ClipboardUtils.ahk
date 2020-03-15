@@ -53,3 +53,32 @@ ClipWaitText(ExpectedText, Timeout:=0.5) {
 		Sleep 50
 	}
 }
+
+ClipWaitTextChange(FromExpectedText, ToExpectedText, Timeout:=0.5) {
+	local ; --
+	Timeout := Timeout+0 ? Max(Timeout*1000, 500) : 500
+	EndTick := A_TickCount + Timeout
+	ClipWait, %Timeout%
+	loop {
+		c := Clipboard
+		if (c == ToExpectedText)
+			return true
+		if (A_TickCount >= EndTick || c != FromExpectedText)
+			return false
+		Sleep 50
+	}
+}
+
+ClipWaitTextChangeToAny(FromExpectedText, Timeout:=0.5) {
+	local ; --
+	Timeout := Timeout+0 ? Max(Timeout*1000, 500) : 500
+	EndTick := A_TickCount + Timeout
+	ClipWait, %Timeout%
+	loop {
+		if (Clipboard != FromExpectedText)
+			return true
+		if (A_TickCount >= EndTick)
+			return false
+		Sleep 50
+	}
+}
