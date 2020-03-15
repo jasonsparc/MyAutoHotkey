@@ -45,10 +45,11 @@ ClipWaitText(ExpectedText, Timeout:=0.5) {
 	Timeout := Timeout+0 ? Max(Timeout*1000, 500) : 500
 	EndTick := A_TickCount + Timeout
 	ClipWait, %Timeout%
-	while (Clipboard != ExpectedText) {
-		Sleep 50
+	loop {
+		if (Clipboard == ExpectedText)
+			return true
 		if (A_TickCount >= EndTick)
-			return Clipboard == ExpectedText
+			return false
+		Sleep 50
 	}
-	return true
 }
