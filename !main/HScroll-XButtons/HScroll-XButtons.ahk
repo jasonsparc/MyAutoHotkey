@@ -23,7 +23,7 @@ StabilizeScroll()
 Click WheelRight %A_EventInfo%
 Return
 
-; Make XButton1 NOP
+; Make XButton1 NOP by default
 *XButton1::Return
 
 
