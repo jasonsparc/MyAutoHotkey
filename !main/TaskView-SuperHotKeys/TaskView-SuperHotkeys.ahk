@@ -414,6 +414,9 @@ XButton2 & WheelRight::Goto RightDesktop
 
 ;-=-=-=- * * * -=-=-=-
 
+; Make XButton2 NOP
+*XButton2::Return
+
 ; Open task view via XButton2
 XButton2::Send #{Tab}
 
@@ -440,7 +443,7 @@ Return
 *~Esc::TaskSwitchingActivated := false
 
 ; Shouldn't activate task view at the moment
-*XButton2::Return
+XButton2::Return
 
 ;_+_+_
 #If IsTaskSwitchingActive()

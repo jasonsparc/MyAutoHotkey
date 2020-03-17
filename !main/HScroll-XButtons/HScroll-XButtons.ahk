@@ -24,7 +24,7 @@ Click WheelRight %A_EventInfo%
 Return
 
 ; Make XButton1 NOP
-XButton1::Return
+*XButton1::Return
 
 
 ;-=-=-=- * * * -=-=-=-
