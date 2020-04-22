@@ -416,6 +416,8 @@ XButton2 & WheelRight::Goto RightDesktop
 
 ; Make XButton2 NOP by default
 *XButton2::Return
+; Prevents unintentional XButton2 keypress with XButton1
+~XButton1 & XButton2::Return
 
 ; Open task view via XButton2
 XButton2::Send #{Tab}
