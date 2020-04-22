@@ -35,7 +35,7 @@ SendInput {Volume_Mute}
 Return
 
 ; Make XButton1 NOP
-XButton1::
+*XButton1::
 XButton1 & XButton2::
 Return
 

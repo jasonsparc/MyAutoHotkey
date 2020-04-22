@@ -7,6 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 Menu, Tray, Icon, imageres.dll, 244
 
 SetMouseDelay, -1
+CoordMode Mouse, Screen
 Return
 
 ;-=-=-=- * * * -=-=-=-
@@ -40,6 +41,25 @@ MouseIsOver(WinTitle) {
 
 	MouseGetPos,,, Win
 	return WinExist(WinTitle . " ahk_id " . Win)
+}
+
+MouseIsOverTaskbar() {
+	MouseGetPos,,, Win
+	return WinExist("ahk_class Shell_TrayWnd ahk_id " . Win)
+}
+
+MouseIsOverNotificationArea() {
+	;CoordMode Mouse, Screen	; <-- Set this instead in the auto-execute section
+	MouseGetPos, X,Y, Win,, 1
+	if (WinExist("ahk_class Shell_TrayWnd ahk_id " . Win)) {
+		WinGetPos sX,sY,,, ahk_class Shell_TrayWnd
+		X -= sX
+		Y -= sY
+
+		ControlGetPos tX,tY,tW,tH, TrayNotifyWnd1, ahk_class Shell_TrayWnd
+		return X >= tX && X <= tX+tW && Y >= tY && Y <= tY+tH
+	}
+	return false
 }
 
 WinTitleUnderMouse() {
@@ -115,6 +135,7 @@ HandleInputsNaturally(ThisHotKey:="", WinTitle:="", WinText:="", Timeout:=1, Exc
 #Include %A_ScriptDir%\HScroll-XButtons_includes
 
 #Include Instant-Copy-Paste.ahk
+#Include TrayVolumeChanger.ahk
 #Include Chrome-Utils.ahk
 
 #Include AdobeReader+Extras.ahk
