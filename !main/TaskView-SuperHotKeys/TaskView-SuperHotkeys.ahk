@@ -21,10 +21,20 @@ Return ; Block execution of utility code below...
 
 
 IsTaskViewActive() {
+	Return WinActive("Task View ahk_class Windows.UI.Core.CoreWindow")
+	; --
+
+	; > **Update 2020-04-04:**
+	; > The ff. workaround code seems to be no longer necessary.
+	; >
+	; > The ff. code is now simply kept here, for potential future use or
+	; > references.
+
 	; Necessary since window classes like "Windows.UI.Core.CoreWindow" are
 	; special and undetectable. See:
 	; - https://www.autohotkey.com/boards/viewtopic.php?t=42517
 	; - https://www.autohotkey.com/boards/viewtopic.php?t=42994
+	/*
 	Id := WinExist("A")
 	If (Id) {
 		WinGetTitle ATitle
@@ -34,6 +44,7 @@ IsTaskViewActive() {
 			Return Id
 	}
 	Return 0x0
+	*/
 }
 
 IsTaskViewActivated() {
