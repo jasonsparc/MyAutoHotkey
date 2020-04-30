@@ -34,7 +34,7 @@ XButton1 & RButton::^Ins
 XButton1 & LButton::+Ins
 
 ; --
-; SuperMemo Element Window and/or Content Window
+; SuperMemo Element Window and/or Contents Window
 #If WinActive("ahk_exe sm18.exe")
 && (WinActive("ahk_class TElWind") || WinActive("ahk_class TContents"))
 
