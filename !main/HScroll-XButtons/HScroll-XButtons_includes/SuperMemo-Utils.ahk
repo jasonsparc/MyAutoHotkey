@@ -10,6 +10,9 @@
 XButton1 & s::
 ^s::^+m
 
+; Quickly skip via "Later Today"
+XButton1 & j::^+j
+
 ; Quickly edit references
 XButton1 & r::
 Send ^{Enter}
@@ -32,6 +35,16 @@ return
 ^v::Send +{Ins}
 XButton1 & RButton::^Ins
 XButton1 & LButton::+Ins
+
+; --
+; SuperMemo Element Window, Contents Window, and/or Browser
+#If WinActive("ahk_exe sm18.exe")
+&& (WinActive("ahk_class TElWind")
+|| WinActive("ahk_class TContents")
+|| WinActive("ahk_class TBrowser"))
+
+; Quickly view the repetition history
+XButton1 & h::^+h
 
 ; --
 ; SuperMemo Element Window and/or Contents Window
