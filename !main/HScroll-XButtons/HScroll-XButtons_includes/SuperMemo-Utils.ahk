@@ -34,7 +34,14 @@ return
 ^c::Send ^{Ins}
 ^v::Send +{Ins}
 XButton1 & RButton::^Ins
-XButton1 & LButton::+Ins
+XButton1 & LButton::
+if (GetKeyState("Shift")) {
+	; Also, quickly invoke Windows 10's Clipboard History.
+	Send #v
+} else {
+	Send +{Ins}
+}
+return
 
 ; --
 ; SuperMemo Element Window, Contents Window, and/or Browser
