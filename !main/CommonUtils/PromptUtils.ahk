@@ -46,6 +46,7 @@ Show(Title:="", OnCloseCallback:="") {
 Show____CheckClose() {
 	local ; --
 	global Show____GuiClose_Callback, Show____Hwnd
+	DetectHiddenWindows On
 	if (!WinExist("ahk_id " Show____Hwnd)) {
 		callback := Show____GuiClose_Callback ; Backup
 		Show() ; Turn off
