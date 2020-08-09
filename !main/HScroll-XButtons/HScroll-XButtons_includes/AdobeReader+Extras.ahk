@@ -87,6 +87,9 @@ AdobeReader_CopyObjects:
 Send {Esc}{RButton}c
 Return
 
+; Mouse mapping for "Find"
+XButton1 & f::^f
+
 ; Mouse mappings for undo and redo
 XButton1 & z::^z
 XButton1 & y::^+z
