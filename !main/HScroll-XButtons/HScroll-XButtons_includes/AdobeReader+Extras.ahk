@@ -42,23 +42,25 @@ Return
 ;
 
 #If MouseIsOver(AdobeReader_WinTitle)
+&& not AdobeReader_AnyEditCtrlInFocus(true)
 
 ; Handy mappings to quickly toggle between the "Hand Tool" and "Select Tool"
 XButton1 & MButton::
 XButton1 & LButton::
-If (RequireWinActive())
+If (RequireWinActive() && !AdobeReader_AnyEditCtrlInFocus(true))
 	Goto AdobeReader_ToggleHandOrSelect
 Return
 
 ; Handy mappings to quickly copy "highlight"-objects
 ; NOTE: It requires a different handling than a mere `CTRL+C`
 ^RButton::
-If (RequireWinActive())
+If (RequireWinActive() && !AdobeReader_AnyEditCtrlInFocus(true))
 	Goto AdobeReader_CopyObjects
 Return
 
 ; - - = - = - = - - - +
 #If WinActive(AdobeReader_WinTitle)
+&& not AdobeReader_AnyEditCtrlInFocus(true)
 
 ; Handy mappings to quickly toggle between the "Hand Tool" and "Select Tool"
 XButton1 & Space::
@@ -102,6 +104,18 @@ Return
 ;
 ; Utilities
 ;
+
+AdobeReader_IsPageViewInFocus(ViaLastFound:=false) {
+	; From AHK docs of `ControlGetFocus`:
+	; > The target window must be active to have a focused control. If the
+	; > window is not active, _OutputVar_ will be made blank.
+	return (ViaLastFound || WinActive(AdobeReader_WinTitle))
+		&& ControlGetText(ControlGetFocus()) == "AVPageView"
+}
+
+AdobeReader_AnyEditCtrlInFocus(ViaLastFound:=false) {
+	return ControlGetFocus(ViaLastFound ? "" : AdobeReader_WinTitle) ~= "i)edit"
+}
 
 AdobeReader_ToggleHandOrSelect() {
 	static SelectToolSet := AdobeReader_RegRead_DefaultSelect()
