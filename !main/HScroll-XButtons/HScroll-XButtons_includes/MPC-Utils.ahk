@@ -12,7 +12,7 @@ NumpadIns::Media_Play_Pause
 ; --
 ; …when playing in the background
 #If WinExist("ahk_class MediaPlayerClassicW ahk_exe mpc-hc64.exe")
-&& ControlGetText("Static3", "ahk_class MediaPlayerClassicW") == "Playing"
+&& ControlGetText("Static3") == "Playing"
 
 ; Quick "Pause" button
 NumpadIns::
