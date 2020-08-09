@@ -104,6 +104,16 @@ XButton1 & `::
 Send {Delete}
 Return
 
+; Convenience when inputting page numbers
+#If MouseIsOver_ControlGetText(AdobeReader_WinTitle) == "AVTopBarView"
+&& AdobeReader_AnyEditCtrlInFocus(true)
+
+; Quickly press "Enter" via the mouse alone
+XButton1 & MButton::
+MButton::Enter
+
+#If ; End If --------------------------------------------------------------
+
 ;
 ; Utilities
 ;

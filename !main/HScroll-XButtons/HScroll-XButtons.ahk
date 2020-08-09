@@ -62,6 +62,20 @@ MouseIsOverNotificationArea() {
 	return false
 }
 
+MouseIsOver_ControlGet(WinTitle, Flag) {
+	if (!WinTitle)
+		; Fail-fast, since an empty `WinTitle` is probably not on purpose.
+		return ""
+
+	MouseGetPos,,, Win, CtrlOut, %Flag%
+	return WinExist(WinTitle . " ahk_id " . Win) ? CtrlOut : ""
+}
+
+MouseIsOver_ControlGetText(WinTitle) {
+	CtrlHwnd := MouseIsOver_ControlGet(WinTitle, 2)
+	return CtrlHwnd ? ControlGetText("", "ahk_id " . CtrlHwnd) : ""
+}
+
 WinTitleUnderMouse() {
 	MouseGetPos,,, Win
 	return ahk_id %Win%
