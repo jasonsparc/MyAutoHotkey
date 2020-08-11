@@ -148,6 +148,7 @@ HandleInputsNaturally(ThisHotKey:="", WinTitle:="", WinText:="", Timeout:=1, Exc
 ; Changes the working directory for subsequent #Includes and FileInstalls.
 #Include %A_ScriptDir%\HScroll-XButtons_includes
 
+#Include Instant-Snipping-Tool.ahk
 #Include Instant-Copy-Paste.ahk
 #Include TrayVolumeChanger.ahk
 #Include Chrome-Utils.ahk
