@@ -11,14 +11,20 @@ NumpadIns::Media_Play_Pause
 
 ; --
 ; …when playing in the background
-#If WinExist("ahk_class MediaPlayerClassicW ahk_exe mpc-hc64.exe")
-&& ControlGetText("Static3") == "Playing"
+#If MPC_IsPlaying()
 
 ; Quick "Pause" button
 NumpadIns::
+DetectHiddenWindows On ; Required for when we're on a different desktop
 ; See, https://www.autohotkey.com/boards/viewtopic.php?p=155967#p155967
 SendMessage, 0x111, 888,,, ahk_class MediaPlayerClassicW ; MEDIA_PAUSE
 Return
+
+MPC_IsPlaying() {
+	DetectHiddenWindows On ; Required for when we're on a different desktop
+	return WinExist("ahk_class MediaPlayerClassicW ahk_exe mpc-hc64.exe")
+		&& ControlGetText("Static3") == "Playing"
+}
 
 #If ; End If
 
