@@ -2,9 +2,15 @@
 ; Just some handy hotkeys for Media Player Classic
 ;
 
+MPC_init() {
+	static _ := MPC_init()
+	; TODO Also handle `mpc-hc.exe` (x86), and not just `mpc-hc64.exe`
+	global MPC_WinTitle := "ahk_class MediaPlayerClassicW ahk_exe mpc-hc64.exe"
+}
+
 ; --
 ; MPC's Main/Player Window
-#IfWinActive ahk_class MediaPlayerClassicW ahk_exe mpc-hc64.exe
+#If WinActive(MPC_WinTitle)
 
 ; Alternative "Play/Pause" button
 NumpadIns::Media_Play_Pause
@@ -14,19 +20,33 @@ XButton1 & LButton::Return ; NOP – to prevent activating the device recorder
 
 ; --
 ; …when playing in the background
-#If MPC_IsPlaying()
+#If !WinActive(MPC_WinTitle)
+&& (MPC_IsPlaying_List_cached := MPC_IsPlaying_List()).Length()
 
 ; Quick "Pause" button
 NumpadIns::
-DetectHiddenWindows On ; Required for when we're on a different desktop
-; See, https://www.autohotkey.com/boards/viewtopic.php?p=155967#p155967
-SendMessage, 0x111, 888,,, ahk_class MediaPlayerClassicW ; MEDIA_PAUSE
+MPC_Pause_IsPlaying_List(MPC_IsPlaying_List_cached)
 Return
 
-MPC_IsPlaying() {
+MPC_IsPlaying_List() {
+	local ; --
 	DetectHiddenWindows On ; Required for when we're on a different desktop
-	return WinExist("ahk_class MediaPlayerClassicW ahk_exe mpc-hc64.exe")
-		&& ControlGetText("Static3") == "Playing"
+	WinGet, g, List, % MPC_WinTitle
+	l := []
+	l.SetCapacity(g)
+	loop % g
+		if (ControlGetText("Static3", "ahk_id " g%A_Index%) == "Playing")
+			l.Push(g%A_Index%)
+	return l
+}
+
+MPC_Pause_IsPlaying_List(l) {
+	local ; --
+	DetectHiddenWindows On ; Required for when we're on a different desktop
+	loop % l.Length() {
+		; See, https://www.autohotkey.com/boards/viewtopic.php?p=155967#p155967
+		SendMessage, 0x111, 888,,, % "ahk_id " l[A_Index] ; MEDIA_PAUSE
+	}
 }
 
 #If ; End If
