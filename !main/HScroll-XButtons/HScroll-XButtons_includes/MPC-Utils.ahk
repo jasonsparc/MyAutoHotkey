@@ -4,8 +4,7 @@
 
 MPC_init() {
 	static _ := MPC_init()
-	; TODO Also handle `mpc-hc.exe` (x86), and not just `mpc-hc64.exe`
-	global MPC_WinTitle := "ahk_class MediaPlayerClassicW ahk_exe mpc-hc64.exe"
+	global MPC_WinTitle := "ahk_class MediaPlayerClassicW"
 }
 
 ; --
