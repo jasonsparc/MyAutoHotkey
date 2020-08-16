@@ -9,6 +9,9 @@
 ; Alternative "Play/Pause" button
 NumpadIns::Media_Play_Pause
 
+XButton1 & RButton::Return ; NOP – to prevent closing video
+XButton1 & LButton::Return ; NOP – to prevent activating the device recorder
+
 ; --
 ; …when playing in the background
 #If MPC_IsPlaying()
