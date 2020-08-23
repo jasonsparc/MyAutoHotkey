@@ -17,6 +17,25 @@ Send {Media_Play_Pause}
 KeyWait NumpadIns ; Prevents the keyboard's auto-repeat feature
 Return
 
+; Another alternative "Play/Pause" button
+~NumpadClear::
+KeyWait NumpadClear
+if (WinActive(MPC_WinTitle))
+	Send {Media_Play_Pause}
+Return
+; ^NOTE: `NumpadClear` is used by `TaskView-SuperHotKeys.ahk` to trigger
+; navigation to a different desktop. So we delay our intended action primarily
+; for that possibility. We only proceed once `NumpadClear` is released, and it
+; must be released while MPC is 'still' the active window.
+;
+; We could've mapped via `NumpadClear up` but that'll trigger our hotkey even
+; when `NumpadClear` was held down outside of MPC, e.g., as a consequence of
+; navigating from another desktop.
+;
+; So in a nutshell, the goal really is to ensure that `NumpadClear` is both
+; pressed and released inside MPC only.
+; ---
+
 XButton1 & RButton::Return ; NOP – to prevent closing video
 XButton1 & LButton::Return ; NOP – to prevent activating the device recorder
 
