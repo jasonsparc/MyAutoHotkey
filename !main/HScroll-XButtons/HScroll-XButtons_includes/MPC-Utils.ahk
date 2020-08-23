@@ -12,7 +12,10 @@ MPC_init() {
 #If WinActive(MPC_WinTitle)
 
 ; Alternative "Play/Pause" button
-NumpadIns::Media_Play_Pause
+NumpadIns::
+Send {Media_Play_Pause}
+KeyWait NumpadIns ; Prevents the keyboard's auto-repeat feature
+Return
 
 XButton1 & RButton::Return ; NOP – to prevent closing video
 XButton1 & LButton::Return ; NOP – to prevent activating the device recorder
