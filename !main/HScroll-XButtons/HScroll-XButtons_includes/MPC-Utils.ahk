@@ -19,8 +19,9 @@ Return
 
 ; Another alternative "Play/Pause" button
 ~NumpadClear::
+MPC_Last_TickCount := A_TickCount
 KeyWait NumpadClear
-if (WinActive(MPC_WinTitle))
+if ((A_TickCount - MPC_Last_TickCount) < 1500 && WinActive(MPC_WinTitle))
 	Send {Media_Play_Pause}
 Return
 ; ^NOTE: `NumpadClear` is used by `TaskView-SuperHotKeys.ahk` to trigger
