@@ -159,6 +159,7 @@ HandleInputsNaturally(ThisHotKey:="", WinTitle:="", WinText:="", Timeout:=1, Exc
 #Include Excel.ahk
 #Include GitExtensions.ahk
 #Include Notepad2.ahk
+#Include Notion-Utils.ahk
 #Include MPC-Utils.ahk
 #Include SuperMemo-Utils.ahk
 #Include VisualStudio.ahk
