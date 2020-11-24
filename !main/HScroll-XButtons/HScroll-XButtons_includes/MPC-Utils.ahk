@@ -57,7 +57,7 @@ MPC_IsPlaying_List() {
 	l := []
 	l.SetCapacity(g)
 	loop % g
-		if (ControlGetText("Static3", "ahk_id " g%A_Index%) == "Playing")
+		if (ControlGetText("Static3", "ahk_id " g%A_Index%) ~= "A)Playing")
 			l.Push(g%A_Index%)
 	return l
 }
