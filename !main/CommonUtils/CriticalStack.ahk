@@ -2,7 +2,7 @@
 ; settings for a later restoration.
 ;
 
-global ___Critical_Stack
+global ___Critical_Stack := ""
 
 CriticalPush(OnOffNumeric:="On") {
 	if (!___Critical_Stack)
@@ -21,7 +21,7 @@ CriticalPop() {
 	Critical, % ___Critical_Stack.Pop()
 }
 
-global ___BatchLines_Stack
+global ___BatchLines_Stack := ""
 
 BatchLinesPush(BatchLines:=-1) {
 	if (!___BatchLines_Stack)
