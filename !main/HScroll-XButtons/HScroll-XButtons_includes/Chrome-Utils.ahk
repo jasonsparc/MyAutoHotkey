@@ -18,7 +18,10 @@ Return
 #IfWinActive ahk_class Chrome_WidgetWin_1 ahk_exe chrome.exe
 
 ; Quickly open/close the "Developer Tools"
-XButton1 & `::^I
+XButton1 & Tab::^I
+
+; Quickly opens the "Console" panel, or closes the "Developer Tools"
+XButton1 & `::^J
 
 ; Quickly inspect an element
 XButton1 & q::^C
