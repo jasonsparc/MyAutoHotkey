@@ -12,12 +12,20 @@ MPC_init() {
 #If WinActive(MPC_WinTitle)
 
 ; Alternative "Play/Pause" button
+XButton1 & Space::
+Send {Media_Play_Pause}
+KeyWait Space ; Prevents the keyboard's auto-repeat feature
+Return
+
+; Alternative "Play/Pause" button that complements the "Numpad Task View
+; Hotkeys" of `TaskView-SuperHotKeys.ahk`
 NumpadIns::
 Send {Media_Play_Pause}
 KeyWait NumpadIns ; Prevents the keyboard's auto-repeat feature
 Return
 
-; Another alternative "Play/Pause" button
+; Another alternative "Play/Pause" button that complements the "Numpad Task
+; View Hotkeys" of `TaskView-SuperHotKeys.ahk`
 ~NumpadClear::
 MPC_Last_TickCount := A_TickCount
 KeyWait NumpadClear
@@ -46,6 +54,7 @@ XButton1 & LButton::Return ; NOP – to prevent activating the device recorder
 && (MPC_IsPlaying_List_cached := MPC_IsPlaying_List()).Length()
 
 ; Quick "Pause" button
+XButton1 & Space::
 NumpadIns::
 MPC_Pause_IsPlaying_List(MPC_IsPlaying_List_cached)
 Return
