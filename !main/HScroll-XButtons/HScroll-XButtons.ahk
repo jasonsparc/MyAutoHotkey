@@ -142,6 +142,18 @@ HandleInputsNaturally(ThisHotKey:="", WinTitle:="", WinText:="", Timeout:=1, Exc
 	return WinActive(WinTitle, WinText, ExcludeTitle, ExcludeText)
 }
 
+; Utility to ensure held keys never get stuck or jammed.
+ReleaseKeys(KeysToRelease*) {
+	local ; --
+	releaseCommand := ""
+	for i, key in KeysToRelease {
+		if (GetKeyState(key))
+			releaseCommand .= "{" key " Up}"
+	}
+	if (releaseCommand)
+		SendInput % releaseCommand
+}
+
 ;-=-=-=- * * * -=-=-=-
 ; Custom handler includes
 
