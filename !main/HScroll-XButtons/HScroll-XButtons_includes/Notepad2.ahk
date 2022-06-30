@@ -4,7 +4,19 @@
 ; Also, provides horizontal scrolling acceleration.
 ;
 
-#If MouseIsOver("ahk_class Notepad2 ahk_exe Notepad2.exe")
+Notepad2_init() {
+	static _ := Notepad2_init()
+
+	; Notepad2-mod -- by XhmikosR
+	; https://github.com/XhmikosR/notepad2-mod
+	;global Notepad2_WinTitle := "ahk_class Notepad2 ahk_exe Notepad2.exe"
+
+	; Notepad2-mod-jrb -- by johnwait
+	; https://github.com/johnwait/notepad2-mod-jrb
+	global Notepad2_WinTitle := "ahk_exe Notepad2-jrb.exe"
+}
+
+#If MouseIsOver(Notepad2_WinTitle)
 
 ; Scroll left
 XButton1 & WheelUp::
