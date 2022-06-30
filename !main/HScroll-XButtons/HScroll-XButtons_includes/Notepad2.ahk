@@ -36,5 +36,9 @@ Loop % GetHScrollLines() * A_EventInfo ** A_EventInfo
 	SendMessage, 0x114, 1, 0, %mcontrol%, ahk_id %mwin%
 Return
 
+#If WinActive(Notepad2_WinTitle)
+
+^+o::Return ; NOP – to prevent accidental encoding changes to OEM 437
+
 #If ; End If
 
