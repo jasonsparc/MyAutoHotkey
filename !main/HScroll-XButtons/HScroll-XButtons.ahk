@@ -151,6 +151,7 @@ HandleInputsNaturally(ThisHotKey:="", WinTitle:="", WinText:="", Timeout:=1, Exc
 #Include Instant-Snipping-Tool.ahk
 #Include Instant-Copy-Paste.ahk
 #Include TrayVolumeChanger.ahk
+#Include MPC-Utils.ahk
 #Include Chrome-Utils.ahk
 
 #Include AdobeReader+Extras.ahk
@@ -159,7 +160,6 @@ HandleInputsNaturally(ThisHotKey:="", WinTitle:="", WinText:="", Timeout:=1, Exc
 #Include Excel.ahk
 #Include GitExtensions.ahk
 #Include Notepad2.ahk
-#Include MPC-Utils.ahk
 #Include SuperMemo-Utils.ahk
 #Include VisualStudio.ahk
 #Include WinMerge.ahk

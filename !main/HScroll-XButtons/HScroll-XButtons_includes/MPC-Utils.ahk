@@ -11,6 +11,17 @@ MPC_init() {
 ; MPC's Main/Player Window
 #If WinActive(MPC_WinTitle)
 
+;XButton1 & RButton::Return ; NOP – to prevent closing video
+;XButton1 & LButton::Return ; NOP – to prevent activating the device recorder
+
+; Alternative "Play/Pause" button
+XButton1 & RButton::
+XButton1 & LButton::
+XButton1 & MButton::
+Send {Media_Play_Pause}
+;KeyWait MButton ; Prevents the keyboard's auto-repeat feature
+Return
+
 ; Alternative "Play/Pause" button
 XButton1 & Space::
 Send {Media_Play_Pause}
@@ -19,18 +30,25 @@ Return
 
 ; Alternative "Play/Pause" button that complements the "Numpad Task View
 ; Hotkeys" of `TaskView-SuperHotKeys.ahk`
-NumpadIns::
+NumpadClear & NumpadRight::
+MPC_Only_NumpadClear := false
 Send {Media_Play_Pause}
-KeyWait NumpadIns ; Prevents the keyboard's auto-repeat feature
+; Prevents the keyboard's auto-repeat feature
+KeyWait NumpadClear
+KeyWait NumpadRight
 Return
 
 ; Another alternative "Play/Pause" button that complements the "Numpad Task
 ; View Hotkeys" of `TaskView-SuperHotKeys.ahk`
 ~NumpadClear::
 MPC_Last_TickCount := A_TickCount
+MPC_Only_NumpadClear := true
 KeyWait NumpadClear
-if ((A_TickCount - MPC_Last_TickCount) < 1500 && WinActive(MPC_WinTitle))
-	Send {Media_Play_Pause}
+if (MPC_Only_NumpadClear) {
+	MPC_Only_NumpadClear := false
+	if ((A_TickCount - MPC_Last_TickCount) < 1500 && WinActive(MPC_WinTitle))
+		Send {Media_Play_Pause}
+}
 Return
 ; ^NOTE: `NumpadClear` is used by `TaskView-SuperHotKeys.ahk` to trigger
 ; navigation to a different desktop. So we delay our intended action primarily
@@ -45,8 +63,12 @@ Return
 ; pressed and released inside MPC only.
 ; ---
 
-XButton1 & RButton::Return ; NOP – to prevent closing video
-XButton1 & LButton::Return ; NOP – to prevent activating the device recorder
+; Another alternative "Play/Pause" button that complements the "Numpad Task
+; View Hotkeys" of `TaskView-SuperHotKeys.ahk`
+NumpadIns::
+Send {Media_Play_Pause}
+KeyWait NumpadIns ; Prevents the keyboard's auto-repeat feature
+Return
 
 ; --
 ; …when playing in the background
@@ -54,7 +76,11 @@ XButton1 & LButton::Return ; NOP – to prevent activating the device recorder
 && (MPC_IsPlaying_List_cached := MPC_IsPlaying_List()).Length()
 
 ; Quick "Pause" button
+XButton1 & RButton::
+XButton1 & LButton::
+XButton1 & MButton::
 XButton1 & Space::
+NumpadClear & NumpadRight::
 NumpadIns::
 MPC_Pause_IsPlaying_List(MPC_IsPlaying_List_cached)
 Return
