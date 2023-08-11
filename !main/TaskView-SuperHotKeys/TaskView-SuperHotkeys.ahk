@@ -85,7 +85,7 @@ IsTaskSwitchingActivated() {
 
 TaskSwitchingPrepareDeactivation(Timeout:=0.5) {
 	TaskSwitchingActivated := false
-	return TaskSwitchingWaitActive()
+	return TaskSwitchingWaitActive(Timeout)
 }
 
 TaskSwitchingWaitActive(Timeout:=0.5) {
