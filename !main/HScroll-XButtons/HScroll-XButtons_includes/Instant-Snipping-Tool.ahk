@@ -44,23 +44,26 @@ Return
 ; Quickly switch to window snip
 XButton1 & w::
 Send {alt down}mw{alt up}
-Goto SnippingTool_ForceNewSnipIfInEditor
+SnippingTool_ForceNewSnipIfInEditor()
+Return
 
 ; Quickly switch to fullscreen snip
 XButton1 & f::
 Send {alt down}ms{alt up}
-Goto SnippingTool_ForceNewSnipIfInEditor
+SnippingTool_ForceNewSnipIfInEditor()
+Return
 
 ; Quickly switch to rectangular snip
 XButton1 & r::
 XButton1 & s::
 Send {alt down}mr{alt up}
-Goto SnippingTool_ForceNewSnipIfInEditor
-
-SnippingTool_ForceNewSnipIfInEditor:
-if (WinActive(SnippingTool_SnipEditor_WinTitle))
-	Send !n
+SnippingTool_ForceNewSnipIfInEditor()
 Return
+
+SnippingTool_ForceNewSnipIfInEditor() {
+	if (WinActive(SnippingTool_SnipEditor_WinTitle))
+		Send !n
+}
 
 #If ; End If
 

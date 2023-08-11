@@ -48,14 +48,14 @@ Return
 XButton1 & MButton::
 XButton1 & LButton::
 If (RequireWinActive() && !AdobeReader_AnyEditCtrlInFocus(true))
-	Goto AdobeReader_ToggleHandOrSelect
+	AdobeReader_ToggleHandOrSelect()
 Return
 
 ; Handy mappings to quickly copy "highlight"-objects
 ; NOTE: It requires a different handling than a mere `CTRL+C`
 ^RButton::
 If (RequireWinActive() && !AdobeReader_AnyEditCtrlInFocus(true))
-	Goto AdobeReader_CopyObjects
+	AdobeReader_CopyObjects()
 Return
 
 ; - - = - = - = - - - +
@@ -64,7 +64,6 @@ Return
 
 ; Handy mappings to quickly toggle between the "Hand Tool" and "Select Tool"
 XButton1 & Space::
-AdobeReader_ToggleHandOrSelect:
 AdobeReader_ToggleHandOrSelect()
 Return
 
@@ -83,8 +82,7 @@ Return
 ; Handy mappings to quickly copy "highlight"-objects
 ; NOTE: It requires a different handling than a mere `CTRL+C`
 XButton1 & c::
-AdobeReader_CopyObjects:
-Send {Esc}{RButton}c
+AdobeReader_CopyObjects()
 Return
 
 ; Mouse mapping for "Find"
@@ -140,6 +138,12 @@ AdobeReader_ToggleHandOrSelect() {
 		Send v
 		SelectToolSet := true
 	}
+}
+
+; Quickly copy "highlight"-objects
+; NOTE: It requires a different handling than a mere `CTRL+C`
+AdobeReader_CopyObjects() {
+	Send {Esc}{RButton}c
 }
 
 AdobeReader_RegRead_DefaultSelect() {

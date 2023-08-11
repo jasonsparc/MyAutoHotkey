@@ -96,29 +96,31 @@ TaskSwitchingWaitActive(Timeout:=0.5) {
 
 ; Utilities for switching between virtual desktops
 
-LeftDesktop:  ; Switch to left virtual desktop
+; Switch to left virtual desktop
+LeftDesktop() {
 	SendInput {Blind}{LCtrl DownTemp}{LWin DownTemp}{Left}{LWin Up}{LCtrl Up}
 	Sleep 180
-Return
+}
 
-RightDesktop:  ; Switch to right virtual desktop
+; Switch to right virtual desktop
+RightDesktop() {
 	SendInput {Blind}{RCtrl DownTemp}{RWin DownTemp}{Right}{RWin Up}{RCtrl Up}
 	Sleep 180
-Return
+}
 
 
 ; Utilities for highlighting tasks in Task View & Task Switching
 ; -- especially made for "MouseWheel"-related Hotkeys
 
-LeftTask:
+LeftTask() {
 	SendInput {Left}
 	Sleep 100
-Return
+}
 
-RightTask:
+RightTask() {
 	SendInput {Right}
 	Sleep 100
-Return
+}
 
 
 ; Utilities to go to a specific desktop number
@@ -221,8 +223,8 @@ GetSessionId() {
 
 ; Override to prevent any active window from capturing our keys
 
-^#Left::Goto LeftDesktop
-^#Right::Goto RightDesktop
+^#Left::LeftDesktop()
+^#Right::RightDesktop()
 
 ;-=-=-=- * * * -=-=-=-
 
@@ -300,8 +302,8 @@ Return
 ;_+_+_
 #If IsTaskViewActive()
 
-PgUp::Goto LeftDesktop
-PgDn::Goto RightDesktop
+PgUp::LeftDesktop()
+PgDn::RightDesktop()
 
 ; Go to Desktop X via Function Keys when in Task View
 
@@ -360,8 +362,8 @@ Return
 
 ; Switch between virtual desktops via NumpadClear + NumpadPgUp/NumpadPgDn
 
-NumpadClear & NumpadPgUp::Goto LeftDesktop
-NumpadClear & NumpadPgDn::Goto RightDesktop
+NumpadClear & NumpadPgUp::LeftDesktop()
+NumpadClear & NumpadPgDn::RightDesktop()
 
 
 ;-=-=-=- * * * -=-=-=-
@@ -371,8 +373,8 @@ NumpadClear & NumpadPgDn::Goto RightDesktop
 ;_+_+_
 #If IsTaskViewActive()
 
-NumpadPgUp::Goto LeftDesktop
-NumpadPgDn::Goto RightDesktop
+NumpadPgUp::LeftDesktop()
+NumpadPgDn::RightDesktop()
 
 ;_+_+_
 #If ; End If
@@ -418,10 +420,10 @@ Return
 
 ; Switch between virtual desktops via XButton2 + MouseWheel
 
-XButton2 & WheelUp::Goto LeftDesktop
-XButton2 & WheelDown::Goto RightDesktop
-XButton2 & WheelLeft::Goto LeftDesktop
-XButton2 & WheelRight::Goto RightDesktop
+XButton2 & WheelUp::LeftDesktop()
+XButton2 & WheelDown::RightDesktop()
+XButton2 & WheelLeft::LeftDesktop()
+XButton2 & WheelRight::RightDesktop()
 
 
 ;-=-=-=- * * * -=-=-=-
@@ -464,10 +466,10 @@ XButton2::Return
 
 ; Highlight tasks via MouseWheel, when in Task Switching
 
-XButton2 & WheelUp::Goto LeftTask
-XButton2 & WheelDown::Goto RightTask
-XButton2 & WheelLeft::Goto LeftTask
-XButton2 & WheelRight::Goto RightTask
+XButton2 & WheelUp::LeftTask()
+XButton2 & WheelDown::RightTask()
+XButton2 & WheelLeft::LeftTask()
+XButton2 & WheelRight::RightTask()
 
 ;_+_+_
 #If ; End If
