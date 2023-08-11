@@ -5,10 +5,10 @@
 
 global calc_sheets := "C:\dev\studies\``helper-calc-sheets"
 
-global StudyWindowPrefs_X := Round(A_ScreenWidth * 432/1920)
+global StudyWindowPrefs_X := Round(A_ScreenWidth * 335/1920)
 global StudyWindowPrefs_Y := Round(A_ScreenHeight * 0/1080)
 
-global StudyWindowPrefs_W := Round(A_ScreenWidth * 1344/1920)
+global StudyWindowPrefs_W := Round(A_ScreenWidth * 1441/1920)
 global StudyWindowPrefs_H := SysGet(62) - 9
 ;global StudyWindowPrefs_H := Round(A_ScreenHeight * 1047/1080)
 
