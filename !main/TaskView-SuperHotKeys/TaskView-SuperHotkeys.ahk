@@ -7,7 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance force
 Menu, Tray, Icon, shell32.dll, 319
 
-;#MaxThreads 2
+#MaxThreads 2
 
 
 ;-=-=-=- * * * -=-=-=-
