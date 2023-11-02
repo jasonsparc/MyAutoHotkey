@@ -434,7 +434,9 @@ XButton2 & WheelRight::RightDesktop()
 ~XButton1 & XButton2::Return
 
 ; Open task view via XButton2
-XButton2::Send #{Tab}
+XButton2::
+Send #{Tab}
+Return
 
 
 ;-=-=-=- * * * -=-=-=-
