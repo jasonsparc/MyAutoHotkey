@@ -5,7 +5,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 #SingleInstance force
-Menu, Tray, Icon, shell32.dll, 319
+Menu, Tray, Icon, imageres.dll, 106
 
 #MaxThreads 2
 
