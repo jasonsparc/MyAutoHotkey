@@ -237,8 +237,8 @@ GetSessionId() {
 
 ; Override to prevent any active window from capturing our keys
 
-^#Left::LeftDesktop()
-^#Right::RightDesktop()
+;^#Left::LeftDesktop()
+;^#Right::RightDesktop()
 
 ;-=-=-=- * * * -=-=-=-
 
