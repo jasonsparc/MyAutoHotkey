@@ -379,6 +379,12 @@ Return
 NumpadClear & NumpadPgUp::LeftDesktop()
 NumpadClear & NumpadPgDn::RightDesktop()
 
+#NumpadPgUp::LeftDesktop()
+#NumpadPgDn::RightDesktop()
+
+#PgUp::LeftDesktop()
+#PgDn::RightDesktop()
+
 
 ;-=-=-=- * * * -=-=-=-
 
@@ -439,6 +445,11 @@ XButton2 & WheelDown::RightDesktop()
 XButton2 & WheelLeft::LeftDesktop()
 XButton2 & WheelRight::RightDesktop()
 
+#WheelUp::LeftDesktop()
+#WheelDown::RightDesktop()
+#WheelLeft::LeftDesktop()
+#WheelRight::RightDesktop()
+
 
 ;-=-=-=- * * * -=-=-=-
 
@@ -447,7 +458,8 @@ XButton2 & WheelRight::RightDesktop()
 ; Prevents unintentional XButton2 keypress with XButton1
 ~XButton1 & XButton2::Return
 
-; Open task view via XButton2
+; Open task view
+#z::
 XButton2::
 TaskViewOpening := true
 KeyWait XButton2
@@ -463,6 +475,7 @@ Return
 ; BONUS: Switch to most recent task
 
 ; Open task switching
+#RButton::
 XButton2 & RButton::
 Send ^!{Tab}
 TaskSwitchingActivated := true
@@ -491,6 +504,11 @@ XButton2 & WheelUp::LeftTask()
 XButton2 & WheelDown::RightTask()
 XButton2 & WheelLeft::LeftTask()
 XButton2 & WheelRight::RightTask()
+
+#WheelUp::LeftTask()
+#WheelDown::RightTask()
+#WheelLeft::LeftTask()
+#WheelRight::RightTask()
 
 ;_+_+_
 #If ; End If
