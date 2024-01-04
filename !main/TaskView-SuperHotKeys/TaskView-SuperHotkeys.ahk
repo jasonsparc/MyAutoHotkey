@@ -17,6 +17,8 @@ Menu, Tray, Icon, imageres.dll, 106
 global TaskViewActivated := false
 global TaskSwitchingActivated := false
 
+global TaskViewOpening := false
+
 ;_+_+_
 Return ; Block execution of utility code below...
 
@@ -98,6 +100,7 @@ TaskSwitchingWaitActive(Timeout:=0.5) {
 
 ; Switch to left virtual desktop
 LeftDesktop() {
+	TaskViewOpening := false
 	if (!GetKeyState("LWin") && !GetKeyState("RWin")) {
 		SendInput {Blind}{LCtrl DownTemp}{LWin DownTemp}{Left}{LWin Up}{LCtrl Up}
 	} else {
@@ -108,6 +111,7 @@ LeftDesktop() {
 
 ; Switch to right virtual desktop
 RightDesktop() {
+	TaskViewOpening := false
 	if (!GetKeyState("LWin") && !GetKeyState("RWin")) {
 		SendInput {Blind}{RCtrl DownTemp}{RWin DownTemp}{Right}{RWin Up}{RCtrl Up}
 	} else {
@@ -121,11 +125,13 @@ RightDesktop() {
 ; -- especially made for "MouseWheel"-related Hotkeys
 
 LeftTask() {
+	TaskViewOpening := false
 	SendInput {Left}
 	Sleep 100
 }
 
 RightTask() {
+	TaskViewOpening := false
 	SendInput {Right}
 	Sleep 100
 }
@@ -443,7 +449,12 @@ XButton2 & WheelRight::RightDesktop()
 
 ; Open task view via XButton2
 XButton2::
-Send #{Tab}
+TaskViewOpening := true
+KeyWait XButton2
+if (TaskViewOpening) {
+	TaskViewOpening := false
+	Send #{Tab}
+}
 Return
 
 
