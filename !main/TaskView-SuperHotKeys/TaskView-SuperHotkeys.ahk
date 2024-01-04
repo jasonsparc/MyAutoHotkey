@@ -98,13 +98,21 @@ TaskSwitchingWaitActive(Timeout:=0.5) {
 
 ; Switch to left virtual desktop
 LeftDesktop() {
-	SendInput {Blind}{LCtrl DownTemp}{LWin DownTemp}{Left}{LWin Up}{LCtrl Up}
+	if (!GetKeyState("LWin") && !GetKeyState("RWin")) {
+		SendInput {Blind}{LCtrl DownTemp}{LWin DownTemp}{Left}{LWin Up}{LCtrl Up}
+	} else {
+		SendInput {Blind}{LCtrl DownTemp}{Left}{LCtrl Up}
+	}
 	Sleep 180
 }
 
 ; Switch to right virtual desktop
 RightDesktop() {
-	SendInput {Blind}{RCtrl DownTemp}{RWin DownTemp}{Right}{RWin Up}{RCtrl Up}
+	if (!GetKeyState("LWin") && !GetKeyState("RWin")) {
+		SendInput {Blind}{RCtrl DownTemp}{RWin DownTemp}{Right}{RWin Up}{RCtrl Up}
+	} else {
+		SendInput {Blind}{RCtrl DownTemp}{Right}{RCtrl Up}
+	}
 	Sleep 180
 }
 
