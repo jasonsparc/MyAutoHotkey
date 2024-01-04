@@ -56,6 +56,7 @@ InitAhkStartupFiles(pLoopDir:=".\!startup\*", pAhkExe:="AutoHotkey.exe") {
 
 		if (Ext = "AHK") {
 			Run %pAhkExe% %QTarget%, %RunDir%, %RunState%
+			Sleep 500 ; Delay to ensure contributed hotkeys are bound in order
 		} else {
 			Run %A_LoopFileFullPath%
 		}
