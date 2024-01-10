@@ -87,8 +87,8 @@ GetHScrollLines() {
 	; https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947(v=vs.85).aspx
 	;
 	; retrieve original horizontal scroll wheel setting
-	; #define SPI_GETWHEELSCROLLCHARS    0x6C
-	DllCall("SystemParametersInfo", UInt, 0x6C, UInt, 0, UIntP, Scroll_Lines, UInt, 0) 
+	; #define SPI_GETWHEELSCROLLLINES    0x68
+	DllCall("SystemParametersInfo", UInt, 0x68, UInt, 0, UIntP, Scroll_Lines, UInt, 0) 
 	return Scroll_Lines
 }
 
