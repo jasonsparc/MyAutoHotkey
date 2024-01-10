@@ -16,13 +16,13 @@ Return
 ; Scroll left
 XButton1 & WheelUp::
 StabilizeScroll()
-Click WheelLeft %A_EventInfo%
+Click % "WheelLeft " (GetHScrollLines() * A_EventInfo)
 Return
 
 ; Scroll right
 XButton1 & WheelDown::
 StabilizeScroll()
-Click WheelRight %A_EventInfo%
+Click % "WheelRight " (GetHScrollLines() * A_EventInfo)
 Return
 
 ; Make XButton1 NOP by default
