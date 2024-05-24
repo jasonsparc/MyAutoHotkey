@@ -1,24 +1,36 @@
 ﻿#Requires AutoHotkey v2.0
-#Include <Lib\CheckUIAccess.ahk>
-
 #SingleInstance force
-TraySetIcon "imageres.dll", 106
+
+TraySetIcon "shell32.dll", 321
+#Include <Lib\CheckUIAccess>
 
 CoordMode "Mouse", "Screen"
 SetTitleMatchMode 3
 SetTitleMatchMode "Fast"
-goto IncludesSetup
 
 ; -----------------------------------------------------------------------------
+; Includes setup
 
-; Scroll left
-XButton2 & WheelUp::{
-	MouseClick "WL", , , Ceil(GetHScrollLines() * GetWheelTurns())
+IncludesSetup_init()
+IncludesSetup_init() {
+	Thread "NoTimers"
+	global IncludesSetup_done := 0
+	SetTimer IncludesSetup_check, -1, 2147483647
 }
 
-; Scroll right
-XButton2 & WheelDown::{
-	MouseClick "WR", , , Ceil(GetHScrollLines() * GetWheelTurns())
+IncludesSetup_deinit() {
+	Thread "NoTimers", 0
+	global IncludesSetup_done := 1
+}
+
+IncludesSetup_check() {
+	if (IncludesSetup_done)
+		return
+	throw Error(
+		"Auto-execute section ended abruptly. Some scripts might not have been initialized.`n"
+		"Perhaps an included script did a ``return`` while under the auto-execute section.",
+		-1, ; Helps in detecting where the abrupt return/exit happened
+	)
 }
 
 ; -----------------------------------------------------------------------------
@@ -40,7 +52,8 @@ GetHScrollLines() {
 	return hScrollLines
 }
 
-HScrollControl(isScrollRight) {
+; NOTE: Named similar to `ControlClick` command.
+ControlHScroll(isScrollRight) {
 	try {
 		MouseGetPos , , &mwin, &mcontrol, 1
 		turns := GetWheelTurns()
@@ -55,7 +68,7 @@ HScrollControl(isScrollRight) {
 	}
 }
 
-HScrollControlAccelerated(isScrollRight) {
+ControlHScrollAccelerated(isScrollRight) {
 	try {
 		MouseGetPos , , &mwin, &mcontrol, 1
 		turns := GetWheelTurns()
@@ -70,7 +83,11 @@ HScrollControlAccelerated(isScrollRight) {
 	}
 }
 
-MouseIsOver(WinTitle) {
+/**
+ * NOTE: Using this function in `#HotIf` checks can be costly. It is recommended
+ * to only use this in `#HotIf` checks for `XButton`-related hotkeys.
+ */
+XButtonIsOver(WinTitle) {
 	if !WinTitle {
 		; Fail-fast, since an empty `WinTitle` is probably not on purpose.
 		return 0x0
@@ -79,12 +96,12 @@ MouseIsOver(WinTitle) {
 	return WinExist(WinTitle " ahk_id " Win)
 }
 
-MouseIsOverTaskbar() {
+XButtonIsOverTaskbar() {
 	MouseGetPos , , &Win, , 1
 	return WinExist("ahk_class Shell_TrayWnd ahk_id " Win)
 }
 
-MouseIsOverNotificationArea() {
+XButtonIsOverNotificationArea() {
 	;CoordMode "Mouse", "Screen"  ; <-- Set this instead in the auto-execute section
 	MouseGetPos &X, &Y, &Win, , 1
 	if (WinExist("ahk_class Shell_TrayWnd ahk_id " Win)) {
@@ -98,32 +115,11 @@ MouseIsOverNotificationArea() {
 }
 
 ; -----------------------------------------------------------------------------
+; Includes
 
-IncludesSetup:
-IncludesSetup_init()
-IncludesSetup_init() {
-	Thread "NoTimers"
-	global IncludesSetup_done := 0
-	SetTimer IncludesSetup_check, -1, 2147483647
-}
-IncludesSetup_deinit() {
-	Thread "NoTimers", 0
-	global IncludesSetup_done := 1
-}
-IncludesSetup_check() {
-	if (IncludesSetup_done)
-		return
-	throw Error(
-		"Auto-execute section ended abruptly. Some scripts might not have been initialized.`n"
-		"Perhaps an included script did a ``return`` while under the auto-execute section.",
-		-1, ; Helps in detecting where the abrupt return/exit happened
-	)
-}
-
-; -----------------------------------------------------------------------------
-; Custom handler includes
-
-#Include Apps\Notepad2.ahk
+#Include Games\! ! Includes.ahk
+#Include Apps\! ! Includes.ahk
+#Include Universal\! ! Includes.ahk
 
 ; -----------------------------------------------------------------------------
 

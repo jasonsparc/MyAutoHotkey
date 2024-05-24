@@ -9,26 +9,26 @@ Notepad2_init()
 Notepad2_init() {
 	; Notepad2-mod -- by XhmikosR
 	; https://github.com/XhmikosR/notepad2-mod
-	global Notepad2_WinTitle := "ahk_class Notepad2 ahk_exe Notepad2.exe"
+	GroupAdd "Notepad2", "ahk_class Notepad2 ahk_exe Notepad2.exe"
 
 	; Notepad2-mod-jrb -- by johnwait
 	; https://github.com/johnwait/notepad2-mod-jrb
-	;global WinTitle := "ahk_exe Notepad2-jrb.exe"
+	;GroupAdd "Notepad2", "ahk_exe Notepad2-jrb.exe"
 }
 
-#HotIf MouseIsOver(Notepad2_WinTitle)
+#HotIf XButtonIsOver("ahk_group Notepad2")
 
 ; Scroll left
 XButton2 & WheelUp::{
-	HScrollControlAccelerated(0)
+	ControlHScrollAccelerated(0)
 }
 
 ; Scroll right
 XButton2 & WheelDown::{
-	HScrollControlAccelerated(1)
+	ControlHScrollAccelerated(1)
 }
 
-#HotIf WinActive(Notepad2_WinTitle)
+#HotIf WinActive("ahk_group Notepad2")
 
 ^+o::return ; NOP – to prevent accidental encoding changes to OEM 437
 
