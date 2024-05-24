@@ -41,3 +41,10 @@ RequireUIAccess(force:=false) {
 EnsureUIAccess() {
 	RequireUIAccess(true)
 }
+
+CheckUIAccess(what := -1) {
+	if IsUIAccess()
+		return
+
+	throw Error("Must be run with UI Access.", what)
+}
