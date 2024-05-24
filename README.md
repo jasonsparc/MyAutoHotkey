@@ -8,3 +8,5 @@ Clone this via `git clone --recurse-submodules` because it currently uses some s
 
 - AutoHotkey v2.0
 - Windows 10, 64-bit
+- A *user* environment variable named `AHK_USER` that points to the current user's AutoHotkey directory (e.g. `C:\Users\MyName\Documents\AutoHotkey` or `%USERPROFILE%\Documents\AutoHotkey`)
+	- Needed by some `*.lnk` files in the repo.
