@@ -37,8 +37,8 @@ XButton2 & s::{
 XButton2 & q::WinClose
 
 ; Quickly cancel snip
-XButton2 & c::
-XButton2 & x::{
+XButton2 & x::
+XButton2 & c::{
 	if (!SnippingTool_IsInEditor())
 		Send "{alt down}c{alt up}"
 }
@@ -49,8 +49,8 @@ XButton2 & d::{
 }
 
 ; Quickly switch to rectangular snip
-XButton2 & r::
-XButton2 & s::{
+XButton2 & s::
+XButton2 & r::{
 	Send SnippingTool_NewSnipSeqIfInEditor() "{alt down}mr{alt up}"
 }
 
