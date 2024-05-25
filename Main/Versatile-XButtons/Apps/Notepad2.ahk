@@ -1,5 +1,4 @@
-﻿#Requires AutoHotkey v2.0
-
+﻿
 ; Notepad2 currently doesn't support the new `WheelLeft` and `WheelRight` inputs.
 ;
 ; Also, provides horizontal scrolling acceleration.
