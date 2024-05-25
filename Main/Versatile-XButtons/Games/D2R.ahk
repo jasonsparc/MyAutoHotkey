@@ -6,6 +6,7 @@
 
 ; See also, https://www.autohotkey.com/docs/v2/misc/Remap.htm#actually
 XButton2::XButton2
+; NOTE: We used a `~` here so that `XButton2` won't be consumed.
 ~XButton2 & LButton::LButton
 ~XButton2 & RButton::RButton
 
