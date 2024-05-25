@@ -27,6 +27,7 @@ XButton2 & s::{
 	if !WinWaitActive("ahk_group SnippingTool")
 		return ; Timed out
 	Send "{alt down}mr{alt up}"
+	KeyWait "s" ; Suppresses auto-repeat
 }
 
 ; --
@@ -34,11 +35,11 @@ XButton2 & s::{
 #HotIf WinActive("ahk_group SnippingTool")
 
 ; Quickly close snipping tool
-XButton2 & q::WinClose
+XButton2 & q up::WinClose
 
 ; Quickly cancel snip
-XButton2 & x::
-XButton2 & c::{
+XButton2 & x up::
+XButton2 & c up::{
 	if (!SnippingTool_IsInEditor())
 		Send "{alt down}c{alt up}"
 }
@@ -46,22 +47,27 @@ XButton2 & c::{
 ; Quickly switch to free-form snip
 XButton2 & d::{
 	Send SnippingTool_NewSnipSeqIfInEditor() "{alt down}mf{alt up}"
+	KeyWait "d" ; Suppresses auto-repeat
 }
 
 ; Quickly switch to rectangular snip
 XButton2 & s::
 XButton2 & r::{
 	Send SnippingTool_NewSnipSeqIfInEditor() "{alt down}mr{alt up}"
+	KeyWait "r" ; Suppresses auto-repeat
+	KeyWait "s"
 }
 
 ; Quickly switch to window snip
 XButton2 & w::{
 	Send SnippingTool_NewSnipSeqIfInEditor() "{alt down}mw{alt up}"
+	KeyWait "w" ; Suppresses auto-repeat
 }
 
 ; Quickly switch to fullscreen snip
 XButton2 & f::{
 	Send SnippingTool_NewSnipSeqIfInEditor() "{alt down}ms{alt up}"
+	KeyWait "f" ; Suppresses auto-repeat
 }
 
 #HotIf
