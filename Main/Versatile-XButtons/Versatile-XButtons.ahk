@@ -114,6 +114,19 @@ XButtonIsOverNotificationArea() {
 	return false
 }
 
+/**
+ * Utility to ensure held keys never get stuck or jammed.
+ */
+ReleaseKeys(keysToRelease*) {
+	releaseCommand := ""
+	for , key in keysToRelease {
+		if GetKeyState(key)
+			releaseCommand .= "{" key " up}"
+	}
+	if (releaseCommand)
+		SendInput releaseCommand
+}
+
 ; -----------------------------------------------------------------------------
 ; Includes
 
