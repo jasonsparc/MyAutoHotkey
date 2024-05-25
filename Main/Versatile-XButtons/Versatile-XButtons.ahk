@@ -8,6 +8,8 @@ CoordMode "Mouse", "Screen"
 SetTitleMatchMode 3
 SetTitleMatchMode "Fast"
 
+#UseHook ; Makes hotkeys more reliable
+
 ; -----------------------------------------------------------------------------
 
 ; Make the XButtons NOP by default.
