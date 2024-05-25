@@ -10,8 +10,10 @@ SetTitleMatchMode "Fast"
 
 ; -----------------------------------------------------------------------------
 
-; Make the XButtons NOP by default – they can be re-enabled via hotkeys like
-; `*XButton0::Send "{Blind}{XButton0}"` in some `#HotIf` context or similar.
+; Make the XButtons NOP by default.
+; - They can be re-enabled in some `#HotIf` context via hotkeys like
+; `*XButton1::Send "{Blind}{XButton1}"` or by remapping to itself, e.g.,
+; `XButton1::XButton1` – see, https://www.autohotkey.com/docs/v2/misc/Remap.htm#actually
 *XButton1::return
 *XButton2::return
 
