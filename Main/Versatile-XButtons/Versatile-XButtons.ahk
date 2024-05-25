@@ -122,6 +122,26 @@ XButtonIsOverNotificationArea() {
 }
 
 /**
+ * A handy utility that activates the window under the mouse cursor while also
+ * waiting for that window to actually activate.
+ *
+ * Mainly useful for mouse hotkeys, since mouse inputs should generally trigger
+ * window activation -- i.e., more specifically when the hotkey trigger involves
+ * mouse buttons such as, `LButton`, `MButton`, `XButton1`, etc.
+ */
+MouseWinActivate() {
+	MouseGetPos , , &mwin, , 1
+	try {
+		if !WinExist("ahk_id " mwin)
+			return
+		WinActivate
+		WinWaitActive
+	} catch TargetError {
+		; Ignore
+	}
+}
+
+/**
  * Utility to ensure held keys never get stuck or jammed.
  */
 ReleaseKeys(keysToRelease*) {
