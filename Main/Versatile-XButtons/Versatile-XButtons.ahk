@@ -9,6 +9,13 @@ SetTitleMatchMode 3
 SetTitleMatchMode "Fast"
 
 ; -----------------------------------------------------------------------------
+
+; Make the XButtons NOP by default – they can be re-enabled via hotkeys like
+; `*XButton0::Send "{Blind}{XButton0}"` in some `#HotIf` context or similar.
+*XButton1::return
+*XButton2::return
+
+; -----------------------------------------------------------------------------
 ; Includes setup
 
 IncludesSetup_init()
