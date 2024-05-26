@@ -1,4 +1,5 @@
 ﻿#Requires AutoHotkey v2.0
+#Include Lang.ahk
 
 IsUIAccess() {
 	static r := RegExMatch(A_AhkPath, "i)[\\/]AutoHotkey[^\\/]*_UIA\.exe$") != 0
@@ -46,5 +47,5 @@ CheckUIAccess(what := -1) {
 	if IsUIAccess()
 		return
 
-	throw Error("Must be run with UI Access.", what)
+	ThrowAndExitApp Error("Must be run with UI Access.", what)
 }

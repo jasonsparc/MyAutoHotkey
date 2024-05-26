@@ -37,7 +37,7 @@ IncludesSetup_deinit() {
 IncludesSetup_check() {
 	if (IncludesSetup_done)
 		return
-	throw Error(
+	ThrowAndExitApp Error(
 		"Auto-execute section ended abruptly. Some scripts might not have been initialized.`n"
 		"Perhaps an included script did a ``return`` while under the auto-execute section.",
 		-1, ; Helps in detecting where the abrupt return/exit happened
