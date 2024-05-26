@@ -65,32 +65,24 @@ GetHScrollLines() {
 
 ; NOTE: Named similar to `ControlClick` command.
 ControlHScroll(isScrollRight) {
-	try {
-		MouseGetPos , , &mwin, &mcontrol, 1
-		turns := GetWheelTurns()
-		isScrollRight := isScrollRight != 0
-		loop Ceil(GetHScrollLines() * turns) {
-			; 0x114 is WM_HSCROLL and the value after it is either SB_LINELEFT
-			; (which is 0) or SB_LINERIGHT (which is 1).
-			SendMessage 0x0114, isScrollRight, 0, mcontrol, "ahk_id " mwin
-		}
-	} catch {
-		; Ignore
+	MouseGetPos , , &mwin, &mcontrol, 1
+	turns := GetWheelTurns()
+	isScrollRight := isScrollRight != 0
+	loop Ceil(GetHScrollLines() * turns) {
+		; 0x114 is WM_HSCROLL and the value after it is either SB_LINELEFT
+		; (which is 0) or SB_LINERIGHT (which is 1).
+		try SendMessage 0x0114, isScrollRight, 0, mcontrol, "ahk_id " mwin
 	}
 }
 
 ControlHScrollAccelerated(isScrollRight) {
-	try {
-		MouseGetPos , , &mwin, &mcontrol, 1
-		turns := GetWheelTurns()
-		isScrollRight := isScrollRight != 0
-		loop Ceil((GetHScrollLines() * turns) ** turns) {
-			; 0x114 is WM_HSCROLL and the value after it is either SB_LINELEFT
-			; (which is 0) or SB_LINERIGHT (which is 1).
-			SendMessage 0x0114, isScrollRight, 0, mcontrol, "ahk_id " mwin
-		}
-	} catch {
-		; Ignore
+	MouseGetPos , , &mwin, &mcontrol, 1
+	turns := GetWheelTurns()
+	isScrollRight := isScrollRight != 0
+	loop Ceil((GetHScrollLines() * turns) ** turns) {
+		; 0x114 is WM_HSCROLL and the value after it is either SB_LINELEFT
+		; (which is 0) or SB_LINERIGHT (which is 1).
+		try SendMessage 0x0114, isScrollRight, 0, mcontrol, "ahk_id " mwin
 	}
 }
 
