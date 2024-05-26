@@ -73,9 +73,8 @@ GetHScrollChars() {
 ; NOTE: Named similar to `ControlClick` command.
 ControlHScroll(isScrollRight) {
 	MouseGetPos , , &mwin, &mcontrol, 1
-	turns := GetWheelTurns()
 	isScrollRight := isScrollRight != 0
-	loop Ceil(GetHScrollChars() * turns) {
+	loop Ceil(GetHScrollChars() * GetWheelTurns()) {
 		; 0x114 is WM_HSCROLL and the value after it is either SB_LINELEFT
 		; (which is 0) or SB_LINERIGHT (which is 1).
 		try SendMessage 0x0114, isScrollRight, 0, mcontrol, "ahk_id " mwin
@@ -84,8 +83,8 @@ ControlHScroll(isScrollRight) {
 
 ControlHScrollAccelerated(isScrollRight) {
 	MouseGetPos , , &mwin, &mcontrol, 1
-	turns := GetWheelTurns()
 	isScrollRight := isScrollRight != 0
+	turns := GetWheelTurns()
 	loop Ceil((GetHScrollChars() * turns) ** turns) {
 		; 0x114 is WM_HSCROLL and the value after it is either SB_LINELEFT
 		; (which is 0) or SB_LINERIGHT (which is 1).
