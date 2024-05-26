@@ -115,13 +115,13 @@ NumpadClear & NumpadIns::{
 ; -----------------------------------------------------------------------------
 ; Task Switcher
 
+NumpadClear & NumpadSub::TaskSwitcher_ToggleOnKeyUpDn("NumpadClear", 0)
+NumpadClear & NumpadAdd::TaskSwitcher_ToggleOnKeyUpDn("NumpadClear", 1)
+
 XButton1 & RButton::
-#RButton::TaskSwitcher_Open()
+#RButton::TaskSwitcher_ToggleOnKeyUpDn("RButton", 1)
 
-NumpadClear & NumpadSub::TaskSwitcher_Open_ViaNumpadClear(0)
-NumpadClear & NumpadAdd::TaskSwitcher_Open_ViaNumpadClear(1)
-
-TaskSwitcher_Open_ViaNumpadClear(toNext) {
+TaskSwitcher_ToggleOnKeyUpDn(triggerKey, toNext) {
 	static opening := false
 	if opening
 		return
@@ -131,7 +131,7 @@ TaskSwitcher_Open_ViaNumpadClear(toNext) {
 			TaskSwitcher_Open()
 		else
 			TaskSwitcher_OpenP()
-		KeyWait "NumpadClear"
+		KeyWait triggerKey
 		TaskSwitcher_SelectTask(0)
 	} finally {
 		opening := false
@@ -140,7 +140,8 @@ TaskSwitcher_Open_ViaNumpadClear(toNext) {
 
 #HotIf WinExist("ahk_group TaskSwitcher")
 
-*RButton up::TaskSwitcher_SelectTask(1)
+*NumpadClear up::
+*RButton up::return ; NOP
 
 NumpadClear & NumpadPgUp::
 NumpadClear & NumpadPgDn::TaskSwitcher_Cancel(1)
