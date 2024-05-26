@@ -90,7 +90,7 @@ ControlHScrollAccelerated(isScrollRight) {
 	isScrollRight := isScrollRight != 0 ; Sanitize
 	MouseGetPos , , &mwin, &mcontrol, 1
 	turns := GetWheelTurns()
-	loop Ceil(turns ** turns) {
+	loop Ceil(turns * turns) {
 		; 0x114 is WM_HSCROLL and the value after it is either SB_LINELEFT
 		; (which is 0) or SB_LINERIGHT (which is 1).
 		try SendMessage 0x0114, isScrollRight, 0, mcontrol, "ahk_id " mwin
