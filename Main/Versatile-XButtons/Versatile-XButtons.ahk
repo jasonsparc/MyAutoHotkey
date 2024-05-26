@@ -24,14 +24,14 @@ SetTitleMatchMode "Fast"
 
 IncludesSetup_init()
 IncludesSetup_init() {
-	Thread "NoTimers"
+	Thread "Priority", 2147483647 ; Unlike `Critical`, events aren't buffered.
 	global IncludesSetup_done := 0
 	SetTimer IncludesSetup_check, -1, 2147483647
 }
 
 IncludesSetup_deinit() {
-	Thread "NoTimers", 0
 	global IncludesSetup_done := 1
+	Thread "Priority", 0 ; Reset
 }
 
 IncludesSetup_check() {
