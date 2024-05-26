@@ -60,7 +60,7 @@ GetWheelTurns() {
 
 GetHScrollLines() {
 	hScrollLines := 0
-	; https://autohotkey.com/board/topic/8435-mouse-wheel-speed/
+	; https://www.autohotkey.com/board/topic/8435-mouse-wheel-speed/
 	; https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947(v=vs.85).aspx
 	;
 	; Retrieve the original horizontal scroll wheel setting
