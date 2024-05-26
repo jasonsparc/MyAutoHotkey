@@ -2,7 +2,7 @@
 #SingleInstance force
 
 TraySetIcon "shell32.dll", 321
-#Include <Lib\CheckUIAccess>
+#Include <CheckUIAccess>
 
 CoordMode "Mouse", "Screen"
 SetTitleMatchMode 3
