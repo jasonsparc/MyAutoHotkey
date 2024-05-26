@@ -53,6 +53,10 @@ IncludesSetup_check() {
 ; -----------------------------------------------------------------------------
 ; Utilities
 
+; Intended usage:
+; ```
+; Ceil(GetWheelTurns())
+; ```
 GetWheelTurns() {
 	; 120 represents 1 notch. See, https://www.autohotkey.com/docs/v2/Hotkeys.htm#Wheel
 	return A_EventInfo / 120
