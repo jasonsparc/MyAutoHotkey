@@ -77,8 +77,8 @@ GetHScrollChars() {
 
 ; NOTE: Named similar to `ControlClick` command.
 ControlHScroll(isScrollRight) {
+	isScrollRight := isScrollRight != 0 ; Sanitize
 	MouseGetPos , , &mwin, &mcontrol, 1
-	isScrollRight := isScrollRight != 0
 	loop Ceil(GetHScrollChars() * GetWheelTurns()) {
 		; 0x114 is WM_HSCROLL and the value after it is either SB_LINELEFT
 		; (which is 0) or SB_LINERIGHT (which is 1).
@@ -87,8 +87,8 @@ ControlHScroll(isScrollRight) {
 }
 
 ControlHScrollAccelerated(isScrollRight) {
+	isScrollRight := isScrollRight != 0 ; Sanitize
 	MouseGetPos , , &mwin, &mcontrol, 1
-	isScrollRight := isScrollRight != 0
 	turns := GetWheelTurns()
 	loop Ceil((GetHScrollChars() * turns) ** turns) {
 		; 0x114 is WM_HSCROLL and the value after it is either SB_LINELEFT
