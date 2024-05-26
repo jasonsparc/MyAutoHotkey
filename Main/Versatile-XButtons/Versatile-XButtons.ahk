@@ -20,10 +20,10 @@ SetTitleMatchMode "Fast"
 *XButton2::return
 
 ; Wheel left
-XButton2 & WheelUp::MouseClick "WL", , , Ceil(GetHScrollChars() * GetWheelTurns())
+XButton2 & WheelUp::MouseClick "WL", , , Ceil(GetWheelTurns())
 
 ; Wheel right
-XButton2 & WheelDown::MouseClick "WR", , , Ceil(GetHScrollChars() * GetWheelTurns())
+XButton2 & WheelDown::MouseClick "WR", , , Ceil(GetWheelTurns())
 
 ; -----------------------------------------------------------------------------
 ; Includes setup
