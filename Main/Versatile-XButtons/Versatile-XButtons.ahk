@@ -94,10 +94,8 @@ ControlHScrollAccelerated(isScrollRight) {
 	}
 }
 
-/**
- * NOTE: Using this function in `#HotIf` checks can be costly. It is recommended
- * to only use this in `#HotIf` checks for `XButton`-related hotkeys.
- */
+; NOTE: Using this function in `#HotIf` checks can be costly. It is recommended
+; to only use this in `#HotIf` checks for `XButton`-related hotkeys.
 XButtonIsOver(WinTitle) {
 	if !WinTitle {
 		; Fail-fast, since an empty `WinTitle` is probably not on purpose.
@@ -125,14 +123,12 @@ XButtonIsOverNotificationArea() {
 	return false
 }
 
-/**
- * A handy utility that activates the window under the mouse cursor while also
- * waiting for that window to actually activate.
- *
- * Mainly useful for mouse hotkeys, since mouse inputs should generally trigger
- * window activation -- i.e., more specifically when the hotkey trigger involves
- * mouse buttons such as, `LButton`, `MButton`, `XButton1`, etc.
- */
+; A handy utility that activates the window under the mouse cursor while also
+; waiting for that window to actually activate.
+;
+; Mainly useful for mouse hotkeys, since mouse inputs should generally trigger
+; window activation -- i.e., more specifically when the hotkey trigger involves
+; mouse buttons such as, `LButton`, `MButton`, `XButton1`, etc.
 MouseWinActivate() {
 	MouseGetPos , , &mwin, , 1
 	try {
@@ -145,9 +141,7 @@ MouseWinActivate() {
 	}
 }
 
-/**
- * Utility to ensure held keys never get stuck or jammed.
- */
+; Utility to ensure held keys never get stuck or jammed.
 ReleaseKeys(keysToRelease*) {
 	releaseCommand := ""
 	for , key in keysToRelease {
