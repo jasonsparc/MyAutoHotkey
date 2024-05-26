@@ -152,6 +152,40 @@ ReleaseKeys(keysToRelease*) {
 		SendInput releaseCommand
 }
 
+GetVirtualDesktopInfo() {
+	sessionId := GetSessionId()
+	if (!sessionId)
+		return
+
+	currentDesktopId := RegRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\" SessionId "\VirtualDesktops", "CurrentVirtualDesktop")
+	desktopList := RegRead("HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops", "VirtualDesktopIDs")
+	desktopCount := StrLen(desktopList) / 32
+
+	currentDesktop := 1
+	i := 0
+	while true {
+		if SubStr(desktopList, i * 32 + 1, 32) = currentDesktopId {
+			currentDesktop := i + 1
+			break
+		}
+		i++
+		if i >= desktopCount
+			return ; Could not find current desktop
+	}
+
+	return {
+		Current: currentDesktop,
+		Count: desktopCount,
+	}
+}
+
+GetSessionId() {
+	sessionId := 0
+	processId := DllCall("GetCurrentProcessId", "UInt")
+	DllCall("ProcessIdToSessionId", "UInt", processId, "UInt*", &sessionId)
+	return sessionId
+}
+
 ; -----------------------------------------------------------------------------
 ; Includes
 
