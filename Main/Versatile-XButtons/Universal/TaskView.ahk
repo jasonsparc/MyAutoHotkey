@@ -1,6 +1,6 @@
 ﻿
 ; Window group for the Task View (win-tab)
-GroupAdd "TaskView", "Task View ahk_class Windows.UI.Core.CoreWindow"
+GroupAdd "TaskView", "Task View ahk_class Windows.UI.Core.CoreWindow ahk_exe explorer.exe"
 
 ; Window group for the Task Switcher (alt-tab)
 ; - See, https://www.autohotkey.com/docs/v2/Hotkeys.htm#AltTabWindow
