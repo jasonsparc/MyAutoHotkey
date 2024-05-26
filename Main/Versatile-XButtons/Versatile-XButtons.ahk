@@ -63,7 +63,8 @@ GetHScrollChars() {
 	; https://www.autohotkey.com/board/topic/8435-mouse-wheel-speed/
 	; https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947(v=vs.85).aspx
 	;
-	; Retrieve the original horizontal scroll wheel setting
+	; > Retrieves the number of characters to scroll when the horizontal mouse
+	; > wheel is moved. The default value is 3.
 	; #define SPI_GETWHEELSCROLLCHARS    0x006C
 	DllCall("SystemParametersInfo", "UInt", 0x6C, "UInt", 0, "UIntP", &hScrollChars, "UInt", 0)
 	return hScrollChars
