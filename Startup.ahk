@@ -7,7 +7,7 @@
 
 items := ""
 loop Files "Startup\*" {
-	if (A_LoopFileExt = "gitignore")
+	if A_LoopFileExt = "gitignore"
 		continue
 
 	items .= A_LoopFilePath "`n"
